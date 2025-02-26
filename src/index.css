@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-y: scroll;
+  ::selection {
+    background-color: #b64aac;
+    color: #ffffff;
+  }
+}
+
+body::-webkit-scrollbar,
+div::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  width: 0 !important;
+  display: none !important;
+  background: transparent !important;
+}
+
+body,
+div,
+* {
+  scrollbar-width: none !important;
+  scrollbar-color: transparent transparent !important;
+}
+
+/* Hide scrollbar for IE and Edge */
+body,
+div,
+* {
+  -ms-overflow-style: none !important;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+/* Light mode */
+body {
+  background-color: white;
+  color: black;
+}
+
+/* Dark mode */
+.dark body {
+  background-color: #121212;
+  color: white;
+}
+
+.notifications-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.notification-item {
+  padding: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.notification-item.unread {
+  background-color: #f0f7ff;
+  border: 1px solid #cce0ff;
+}
+
+.notification-item.read {
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+}
+
+.notification-item p {
+  margin: 0;
+  color: #333;
+}
+
+.notification-item small {
+  color: #666;
+}
+
+.notifications-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.mark-all-read-btn {
+  background: none;
+  border: none;
+  color: #4a90e2;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.notification-content {
+  flex: 1;
+}
+
+.notification-content h4 {
+  margin: 0 0 5px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.unread-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #4a90e2;
+  margin-left: 10px;
+}
+
+.no-notifications {
+  text-align: center;
+  color: #666;
+  padding: 20px;
+}
