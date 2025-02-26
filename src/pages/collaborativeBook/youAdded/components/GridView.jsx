@@ -26,41 +26,41 @@ export const GridView = ({
       {paginatedTransactions.map((entry, index) => (
         <div
           key={entry._id}
-          className={`bg-white rounded-2xl shadow-sm p-6 hover:shadow-md transition-all duration-200 relative overflow-hidden ${
+          className={`bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6 hover:shadow-md transition-all duration-200 relative overflow-hidden ${
             entry.confirmationStatus === "pending"
-              ? "border border-yellow-200"
+              ? "border  border-yellow-200 dark:border-yellow-300"
               : entry.transactionType === "you will get"
-              ? "border border-green-200"
-              : "border border-red-200"
+              ? "border  border-green-200 dark:border-green-300"
+              : "border border-red-200 dark:border-red-300"
           }`}
         >
           {/* Status Notch */}
           <div
             className={`absolute -top-4 -right-4 w-16 h-16 rounded-full transform rotate-45 ${
               entry.confirmationStatus === "pending"
-                ? "bg-yellow-200"
+                ? "bg-yellow-200 dark:bg-yellow-300"
                 : entry.transactionType === "you will get"
-                ? "bg-green-200"
-                : "bg-red-200"
+                ? "bg-green-200 dark:bg-green-400"
+                : "bg-red-200 dark:bg-red-300"
             }`}
           />
 
           {/* Index Number */}
-          <div className="absolute top-2 left-2 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100">
-            <span className="text-sm font-medium text-gray-600">
+          <div className="absolute top-2 left-2 w-8 h-8 flex items-center  dark:bg-gray-700 justify-center rounded-full bg-gray-100">
+            <span className="text-sm font-medium dark:text-gray-400 text-gray-600">
               {index + 1}
             </span>
           </div>
 
           {/* User Info */}
           <div className="flex items-start space-x-3 mb-6 mt-4">
-            <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0">
-              <span className="text-xl font-medium text-gray-600">
+            <div className="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0">
+              <span className="text-xl font-medium dark:text-gray-400 text-gray-600">
                 {entry.initiatedBy.charAt(0).toUpperCase()}
               </span>
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="text-lg font-medium text-gray-900 truncate">
+              <h3 className="text-lg font-medium dark:text-gray-400 text-gray-900 truncate">
                 {entry.initiatedBy}
               </h3>
               <span
@@ -76,11 +76,11 @@ export const GridView = ({
                 <div className="relative">
                   <div className="mt-4">
                     <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-medium text-gray-900">Description</h3>
+                      <h3 className="text-sm font-medium dark:text-gray-400 text-gray-900">Description</h3>
                       {entry.file && (
                         <button
                           onClick={() => handleFileClick(entry)}
-                          className={`p-1.5 rounded-full hover:bg-gray-100 transition-colors ${
+                          className={`p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700   transition-colors ${
                             entry.file.toLowerCase().endsWith(".pdf")
                               ? "text-red-500"
                               : "text-blue-500"
@@ -101,7 +101,7 @@ export const GridView = ({
                     </div>
                     {entry.description ? (
                       <>
-                        <p className="mt-1 text-sm text-gray-600 line-clamp-2">
+                        <p className="mt-1 text-sm dark:text-gray-400 text-gray-600 line-clamp-2">
                           {entry.description}
                         </p>
                         {entry.description.length > 100 && (
@@ -117,7 +117,7 @@ export const GridView = ({
                         )}
                       </>
                     ) : (
-                      <p className="mt-1 text-sm text-gray-400">--</p>
+                      <p className="mt-1 text-sm dark:text-gray-400 text-gray-600">--</p>
                     )}
                   </div>
                 </div>
@@ -142,7 +142,7 @@ export const GridView = ({
           </div>
 
           {/* Status and Actions */}
-          <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+          <div className="flex items-center justify-between mt-4 pt-4 border-t  border-gray-100 dark:border-gray-700">
             <div className="flex items-center">
               {entry.confirmationStatus === "confirmed" ? (
                 <span className="flex items-center text-green-600">

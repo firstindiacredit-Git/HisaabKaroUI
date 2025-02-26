@@ -2,22 +2,21 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
 const AuthContext = createContext();
- 
+
 export const useAuth = () => {
   return useContext(AuthContext);
-}; 
+};
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(true);
-  
 
   useEffect(() => {
     // Check if user is logged in on mount
     const token = localStorage.getItem("token");
     const storedUsername = localStorage.getItem("username");
-    
+
     if (token && storedUsername) {
       setIsLoggedIn(true);
       setUsername(storedUsername);
@@ -28,7 +27,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (user) => {
     try {
       console.log("Login function triggered", user);
-      
+
       // Store user data in localStorage
       localStorage.setItem("token", user.token);
       localStorage.setItem("username", user.name);
@@ -41,7 +40,6 @@ export const AuthProvider = ({ children }) => {
       // Update state
       setIsLoggedIn(true);
       setUsername(user.name);
-
 
       return true;
     } catch (error) {
@@ -61,7 +59,6 @@ export const AuthProvider = ({ children }) => {
       // Reset state
       setIsLoggedIn(false);
       setUsername("");
-
     } catch (error) {
       console.error("Error in logout:", error);
     }
@@ -72,12 +69,10 @@ export const AuthProvider = ({ children }) => {
     username,
     login,
     logout,
-    loading
+    loading,
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+ 
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

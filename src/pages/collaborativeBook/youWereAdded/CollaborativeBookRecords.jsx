@@ -1652,7 +1652,7 @@ const CollaborativeBookRecords = () => {
         </div>
 
         <div className="container mx-auto">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 dark:bg-gray-800 bg-gray-100 rounded-md shadow-sm mb-4">
+          {/* <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 dark:bg-gray-800 bg-gray-100 rounded-md shadow-sm mb-4">
             <span className="text-sm sm:text-base text-gray-800 dark:text-white/50 font-medium mb-2 sm:mb-0">
               <b className="text-blue-600">Showing:</b> {startIndex + 1} to{" "}
               {Math.min(endIndex, totalItems)}
@@ -1660,7 +1660,7 @@ const CollaborativeBookRecords = () => {
             <span className="text-sm sm:text-base text-gray-800 font-medium">
               <b className="text-green-600">Total Entries:</b> {totalItems}
             </span>
-          </div>
+          </div> */}
 
           {/* Transaction History */}
           <div className="shadow overflow-hidden border-b dark:border-gray-700 border-gray-200 sm:rounded-lg">

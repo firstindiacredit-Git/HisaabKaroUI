@@ -209,7 +209,7 @@ const TransactionTable = forwardRef(
         />
 
         {paginatedTransactions.length === 0 ? (
-          <div className="flex flex-col items-center justify-center p-8 bg-white rounded-lg shadow-sm mt-4">
+          <div className="flex flex-col items-center justify-center p-8 dark:bg-gray-800 bg-white rounded-lg shadow-sm mt-4">
             <div className="text-gray-500 text-lg font-medium mb-2">No results found</div>
             <p className="text-gray-400 text-sm">Try adjusting your filters or clear them to see more results.</p>
             {isFilterApplied && (
@@ -235,7 +235,7 @@ const TransactionTable = forwardRef(
             setShowDescriptionModal={setShowDescriptionModal}
           />
         ) : (
-          <TableView
+          <TableView 
             paginatedTransactions={enrichedTransactions}
             userId={userId}
             updating={updating}

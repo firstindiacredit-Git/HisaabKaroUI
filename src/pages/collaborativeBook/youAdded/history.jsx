@@ -80,7 +80,7 @@ const History = () => {
   }
 
   return (
-    <div className="p-4 max-w-6xl mx-auto">
+    <div className="p-4 w-full mx-auto">
       <TransactionHeader transaction={transaction} />
 
       <ActionButtons 

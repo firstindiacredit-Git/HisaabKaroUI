@@ -74,7 +74,7 @@ export const FilterControls = ({
   };
 
   return (
-    <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center justify-between gap-2 sm:gap-4 p-2 sm:p-4 bg-white rounded-lg shadow-sm">
+    <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center justify-between gap-2 sm:gap-4 p-2 sm:p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
       {/* Filter controls wrapper */}
       <div className="w-full flex flex-col sm:flex-row gap-2 sm:gap-4">
         {/* Top row - filters */}
@@ -83,35 +83,35 @@ export const FilterControls = ({
           <div className="relative shrink-0">
             <button
               onClick={() => setShowSortMenu(!showSortMenu)}
-              className="flex items-center space-x-1 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 whitespace-nowrap"
+              className="flex items-center space-x-1 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-700 dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 whitespace-nowrap"
             >
               <BsFilter className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>Sort</span>
             </button>
             {showSortMenu && (
-              <div className="absolute left-0 z-10 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200">
+              <div className="absolute left-0 z-10 mt-2 w-48 bg-white dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 rounded-lg shadow-lg border border-gray-200">
                 <div className="py-1">
                   <button
                     onClick={() => handleSortOptionClick("newest")}
-                    className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100"
+                    className="block w-full px-4 py-2 text-sm text-left bg-white text-gray-700 dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 hover:bg-gray-100"
                   >
                     Newest First
                   </button>
                   <button
                     onClick={() => handleSortOptionClick("oldest")}
-                    className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100"
+                    className="block w-full px-4 py-2 text-sm text-left bg-white text-gray-700 dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 hover:bg-gray-100"
                   >
                     Oldest First
                   </button>
                   <button
                     onClick={() => handleSortOptionClick("amount_high")}
-                    className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100"
+                    className="block w-full px-4 py-2 text-sm text-left bg-white text-gray-700 dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 hover:bg-gray-100"
                   >
                     Amount (High to Low)
                   </button>
                   <button
                     onClick={() => handleSortOptionClick("amount_low")}
-                    className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100"
+                    className="block w-full px-4 py-2 text-sm text-left bg-white text-gray-700 dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700   hover:bg-gray-100"
                   >
                     Amount (Low to High)
                   </button>
@@ -127,32 +127,30 @@ export const FilterControls = ({
               className={`flex items-center space-x-1 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm ${
                 statusFilter !== "all"
                   ? "text-blue-600 bg-blue-50 border border-blue-200"
-                  : "text-gray-700 bg-white border border-gray-300"
+                  : "text-gray-700 bg-white border dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400 border-gray-300"
               } rounded-lg hover:bg-gray-50 whitespace-nowrap`}
             >
               <AiOutlineFilter className="w-4 h-4 sm:w-5 sm:h-5" />
-              <span>
-                {statusFilter === "all" ? "Status" : statusFilter}
-              </span>
+              <span>{statusFilter === "all" ? "Status" : statusFilter}</span>
             </button>
             {showStatusFilterMenu && (
-              <div className="absolute left-0 z-10 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200">
+              <div className="absolute left-0 z-10 mt-2 w-48 bg-white dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 rounded-lg shadow-lg border border-gray-200">
                 <div className="py-1">
                   <button
                     onClick={() => handleStatusOptionClick("all")}
-                    className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100"
+                    className="block w-full px-4 py-2 text-sm text-left bg-white text-gray-700 dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 hover:bg-gray-100"
                   >
                     All
                   </button>
                   <button
                     onClick={() => handleStatusOptionClick("confirmed")}
-                    className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100"
+                    className="block w-full px-4 py-2 text-sm text-left bg-white text-gray-700 dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 hover:bg-gray-100"
                   >
                     Confirmed
                   </button>
                   <button
                     onClick={() => handleStatusOptionClick("pending")}
-                    className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100"
+                    className="block w-full px-4 py-2 text-sm text-left bg-white text-gray-700 dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 hover:bg-gray-100"
                   >
                     Pending
                   </button>
@@ -168,7 +166,7 @@ export const FilterControls = ({
               className={`flex items-center space-x-1 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm ${
                 addedByFilter !== "all"
                   ? "text-blue-600 bg-blue-50 border border-blue-200"
-                  : "text-gray-700 bg-white border border-gray-300"
+                    : "text-gray-700 bg-white border dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400 border-gray-300"
               } rounded-lg hover:bg-gray-50 whitespace-nowrap`}
             >
               <AiOutlineFilter className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -177,11 +175,11 @@ export const FilterControls = ({
               </span>
             </button>
             {showAddedByFilterMenu && (
-              <div className="absolute left-0 z-10 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200">
+              <div className="absolute left-0 z-10 mt-2 w-48 bg-white dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 rounded-lg shadow-lg border border-gray-200">
                 <div className="py-1">
                   <button
                     onClick={() => handleAddedByOptionClick("all")}
-                    className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100"
+                    className="block w-full px-4 py-2 text-sm text-left bg-white text-gray-700 dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 hover:bg-gray-100"
                   >
                     All
                   </button>
@@ -189,7 +187,7 @@ export const FilterControls = ({
                     <button
                       key={name}
                       onClick={() => handleAddedByOptionClick(name)}
-                      className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100"
+                      className="block w-full px-4 py-2 text-sm text-left bg-white text-gray-700 dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 hover:bg-gray-100"
                     >
                       {name}
                     </button>
@@ -218,8 +216,8 @@ export const FilterControls = ({
               onClick={() => setViewMode("list")}
               className={`p-1.5 sm:p-2 rounded-lg ${
                 viewMode === "list"
-                  ? "bg-blue-100 text-blue-600"
-                  : "text-gray-500 hover:bg-gray-100"
+                  ? "bg-blue-100  text-blue-600"
+                  : "text-gray-500 dark:text-gray-400 hover:bg-gray-100"
               }`}
               title="List View"
             >
@@ -229,8 +227,8 @@ export const FilterControls = ({
               onClick={() => setViewMode("grid")}
               className={`p-1.5 sm:p-2 rounded-lg ${
                 viewMode === "grid"
-                  ? "bg-blue-100 text-blue-600"
-                  : "text-gray-500 hover:bg-gray-100"
+                  ? "bg-blue-100  text-blue-600"
+                  : "text-gray-500 dark:text-gray-400 hover:bg-gray-100"
               }`}
               title="Grid View"
             >
@@ -242,18 +240,18 @@ export const FilterControls = ({
           <div className="relative items-per-page-dropdown">
             <button
               onClick={() => setShowItemsPerPage(!showItemsPerPage)}
-              className="flex items-center justify-center space-x-1 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
+              className="flex items-center dark:text-gray-400 dark:bg-gray-700 dark:border-gray-700 justify-center space-x-1 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
             >
               <span>Show: {itemsPerPage}</span>
             </button>
             {showItemsPerPage && (
-              <div className="absolute right-0 z-10 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200">
+              <div className="absolute right-0 z-10 mt-2 w-48 bg-white dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 rounded-lg shadow-lg border border-gray-200">
                 <div className="py-1">
                   {[10, 20, 50, 100].map((number) => (
                     <button
                       key={number}
                       onClick={() => handleItemsPerPageOptionClick(number)}
-                      className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100"
+                      className="block w-full px-4 py-2 text-sm text-left bg-white text-gray-700 dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 hover:bg-gray-100"
                     >
                       {number} items
                     </button>
@@ -267,7 +265,7 @@ export const FilterControls = ({
           {pendingTransactions?.length > 0 && (
             <button
               onClick={handleSendReminders}
-              className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-green-600 bg-green-50 rounded-md hover:bg-green-100"
+              className="inline-flex items-center px-3 py-2 text-sm font-medium text-green-600 bg-green-50 rounded-md hover:bg-green-100"
               title="Send WhatsApp Reminders"
             >
               <BsWhatsapp className="w-4 h-4 mr-1.5" />
