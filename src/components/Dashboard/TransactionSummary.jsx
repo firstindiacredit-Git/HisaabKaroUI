@@ -54,7 +54,7 @@ const TransactionSummary = ({ transactions }) => {
   return (
     <div className="mb-4 md:mb-6">
       {/* Container with no horizontal scroll on mobile */}
-      <div className="grid grid-cols-3 md:grid-cols-3 gap-2 md:gap-4 px-2 md:px-0 max-w-5xl mx-auto">
+      <div className="grid grid-cols-3 md:grid-cols-3 gap-2 md:gap-4 px-2 md:px-0 w-full mx-auto">
         {/* You Will Get Card - Smaller on mobile */}
         <div className="relative overflow-hidden bg-green-50 dark:border-green-500 dark:bg-green-500 p-2 md:p-3.5 rounded-lg shadow-sm border border-green-100 hover:shadow-md transition-all duration-300">
           <div className="relative">

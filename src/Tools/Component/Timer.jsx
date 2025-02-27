@@ -70,15 +70,20 @@ const Timer = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 p-2 sm:p-4 md:p-8">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-2 sm:p-4 md:p-8">
       <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm overflow-hidden">
           {/* Header */}
           <div className="relative p-4 sm:p-6">
             <div className="absolute top-4 sm:top-6 left-4 sm:left-6">
-              <Back />
+              <div className="p-4 border-b flex items-center border-gray-100 dark:border-gray-600">
+                <span className="text-gray-900 flex items-center rounded-full bg-blue-50 dark:bg-gray-100/50 border border-gray-100 dark:border-gray-800 pr-4 dark:text-gray-100">
+                  <Back />
+                  Back
+                </span>
+              </div>
             </div>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-black">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-black dark:text-gray-300 ">
               Timer
             </h1>
           </div>
@@ -86,20 +91,24 @@ const Timer = () => {
           {/* Main Content */}
           <div className="p-4 sm:p-6 md:p-8">
             {/* Timer Display */}
-            <div className="flex flex-col items-center mb-6 sm:mb-8">
+              <div className="flex flex-col items-center mb-6 sm:mb-8">
               <div className="flex items-center justify-center gap-2 sm:gap-3 md:gap-4">
                 <TimeUnit
                   value={hours}
                   onIncrement={incrementHours}
                   onDecrement={decrementHours}
                 />
-                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-400 mb-8 sm:mb-10 md:mb-12">:</div>
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-400 mb-8 sm:mb-10 md:mb-12">
+                  :
+                </div>
                 <TimeUnit
                   value={minutes}
                   onIncrement={incrementMinutes}
                   onDecrement={decrementMinutes}
                 />
-                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-400 mb-8 sm:mb-10 md:mb-12">:</div>
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-400 mb-8 sm:mb-10 md:mb-12">
+                  :
+                </div>
                 <TimeUnit
                   value={seconds}
                   onIncrement={incrementSeconds}
@@ -115,7 +124,7 @@ const Timer = () => {
                 disabled={isActive}
                 className={`px-4 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded-xl text-base sm:text-lg font-medium transition-all duration-200 ${
                   isActive
-                    ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                    ? "bg-gray-100 dark:bg-gray-900 text-gray-400 cursor-not-allowed"
                     : "bg-blue-600 text-white hover:bg-blue-700 hover:shadow-md"
                 }`}
               >
@@ -126,7 +135,7 @@ const Timer = () => {
                 disabled={!isActive}
                 className={`px-4 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded-xl text-base sm:text-lg font-medium transition-all duration-200 ${
                   !isActive
-                    ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                    ? "bg-gray-100 dark:bg-gray-900 text-gray-400 cursor-not-allowed"
                     : "bg-red-600 text-white hover:bg-red-700 hover:shadow-md"
                 }`}
               >
@@ -134,7 +143,7 @@ const Timer = () => {
               </button>
               <button
                 onClick={resetTimer}
-                className="px-4 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded-xl bg-gray-600 text-white text-base sm:text-lg font-medium transition-all duration-200 hover:bg-gray-700 hover:shadow-md"
+                className="px-4 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded-xl bg-gray-600 dark:bg-gray-900 text-white text-base sm:text-lg font-medium transition-all duration-200 hover:bg-gray-700 hover:shadow-md"
               >
                 Reset
               </button>

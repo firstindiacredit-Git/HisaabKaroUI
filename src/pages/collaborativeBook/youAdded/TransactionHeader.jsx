@@ -72,7 +72,7 @@ const TransactionHeader = ({ transaction }) => {
           Transaction Details
         </h1>
         
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Book Name Card */}
           <div className="relative group">
             <div className="absolute inset-0 bg-blue-400 dark:bg-blue-600 rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-200"></div>
@@ -88,7 +88,7 @@ const TransactionHeader = ({ transaction }) => {
           </div>
 
           {/* User Name Card */}
-          <div className="relative group">
+          {/* <div className="relative group">
                 <div className="absolute inset-0 bg-emerald-400 dark:bg-emerald-600 rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-200"></div>
             <div className="relative bg-white ring-1 ring-gray-200 dark:ring-emerald-500 dark:bg-emerald-400  rounded-xl p-3 sm:p-6 hover:shadow-lg transition-shadow duration-200">
               <div className="text-emerald-600 dark:text-emerald-600 mb-1 sm:mb-2 flex items-center">
@@ -102,7 +102,7 @@ const TransactionHeader = ({ transaction }) => {
                 <span className="hidden sm:block">{userName}</span>
               </p>
             </div>
-          </div>
+          </div> */}
 
           {/* Client Name Card */}
           <div className="relative group">

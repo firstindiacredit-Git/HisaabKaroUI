@@ -1,39 +1,95 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 
-const TransactionForm = ({ formData, isSubmitting, onSubmit, onChange, onCancel }) => {
+const TransactionForm = ({
+  formData,
+  isSubmitting,
+  onSubmit,
+  onChange,
+  onCancel,
+}) => {
   const isYouWillGive = formData.transactionType === "you will give";
-  const formColor = isYouWillGive ? {
-    bg: "bg-green-50",
-    border: "border-green-200",
-    button: "bg-green-600 hover:bg-green-700",
-    ring: "focus:ring-green-500",
-    text: "text-green-700"
-  } : {
-    bg: "bg-red-50",
-    border: "border-red-200",
-    button: "bg-red-600 hover:bg-red-700",
-    ring: "focus:ring-red-500",
-    text: "text-red-700"
-  };
+  const formColor = isYouWillGive
+    ? {
+        bg: "bg-green-50",
+        border: "border-green-200",
+        button: "bg-green-600 hover:bg-green-700",
+        ring: "focus:ring-green-500",
+        text: "text-green-700",
+      }
+    : {
+        bg: "bg-red-50",
+        border: "border-red-200",
+        button: "bg-red-600 hover:bg-red-700",
+        ring: "focus:ring-red-500",
+        text: "text-red-700",
+      };
 
-  const [fileError, setFileError] = useState('');
+  const [fileError, setFileError] = useState("");
+  const [previewUrl, setPreviewUrl] = useState(null);
+
+  useEffect(() => {
+    // Cleanup preview URL when component unmounts
+    return () => {
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+      }
+    };
+  }, []);
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setFileError("");
+
+    // Cleanup previous preview
+    if (previewUrl) {
+      URL.revokeObjectURL(previewUrl);
+      setPreviewUrl(null);
+    }
+
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        setFileError("File size must be less than 5MB");
+        e.target.value = ""; // Reset the input
+        return;
+      }
+
+      // Create preview URL for images
+      if (file.type.startsWith("image/")) {
+        setPreviewUrl(URL.createObjectURL(file));
+      }
+
+      onChange({ target: { name: "file", value: file } });
+    }
+  };
 
   return (
     <>
       {/* Modal header */}
-      <div className={`${formColor.bg} rounded-t-xl`}>
+      <div className={`${formColor.bg} rounded-t-xl `}>
         <div className={`px-6 py-4 border-b ${formColor.border}`}>
           <div className="flex items-center justify-between">
             <h3 className={`text-lg font-semibold ${formColor.text}`}>
-              {formData.transactionType === "you will give" ? "You Will Get" : "You Will Give"}
+              {formData.transactionType === "you will give"
+                ? "You Will Get"
+                : "You Will Give"}
             </h3>
             <button
               onClick={onCancel}
               className="text-gray-400 hover:text-gray-500 focus:outline-none"
             >
               <span className="sr-only">Close</span>
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
@@ -44,7 +100,11 @@ const TransactionForm = ({ formData, isSubmitting, onSubmit, onChange, onCancel 
           <div className="space-y-4">
             {/* Amount Input */}
             <div>
-              <label className={`block text-sm font-medium ${formColor.text} mb-1`}>Amount</label>
+              <label
+                className={`block text-sm font-medium ${formColor.text} mb-1`}
+              >
+                Amount
+              </label>
               <div className="relative mt-1 rounded-md shadow-sm">
                 <input
                   type="number"
@@ -61,7 +121,11 @@ const TransactionForm = ({ formData, isSubmitting, onSubmit, onChange, onCancel 
 
             {/* Description Input */}
             <div>
-              <label className={`block text-sm font-medium ${formColor.text} mb-1`}>Description</label>
+              <label
+                className={`block text-sm font-medium ${formColor.text} mb-1`}
+              >
+                Description
+              </label>
               <textarea
                 name="description"
                 rows="3"
@@ -74,48 +138,54 @@ const TransactionForm = ({ formData, isSubmitting, onSubmit, onChange, onCancel 
 
             {/* File Upload */}
             <div>
-              <label className={`block text-sm font-medium ${formColor.text} mb-1`}>Attach Receipt (Optional)</label>
-              <div className={`mt-1 flex justify-center px-6 pt-5 pb-6 border-2 ${formColor.border} border-dashed rounded-md`}>
+              <label
+                className={`block text-sm font-medium ${formColor.text} mb-1`}
+              >
+                Attach Receipt (Optional)
+              </label>
+              <label
+                className={`mt-1 flex justify-center px-6 pt-5 pb-6 border-2 ${formColor.border} border-dashed rounded-md cursor-pointer`}
+              >
                 <div className="space-y-1 text-center">
-                  <svg
-                    className={`mx-auto h-12 w-12 ${formColor.text}`}
-                    stroke="currentColor"
-                    fill="none"
-                    viewBox="0 0 48 48"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                  {previewUrl ? (
+                    <div className="mb-4">
+                      <img
+                        src={previewUrl}
+                        alt="Preview"
+                        className="mx-auto max-h-48 object-contain rounded-lg"
+                      />
+                    </div>
+                  ) : (
+                    <svg
+                      className={`mx-auto h-12 w-12 ${formColor.text}`}
+                      stroke="currentColor"
+                      fill="none"
+                      viewBox="0 0 48 48"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                        strokeWidth={2}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  )}
                   <div className="flex flex-col space-y-2">
                     <div className="flex text-sm text-gray-600">
-                      <label
-                        htmlFor="file-upload"
+                      <input
+                        id="file-upload"
+                        name="file-upload"
+                        type="file"
+                        className="sr-only"
+                        accept=".jpg,.jpeg,.png,.pdf"
+                        onChange={handleFileChange}
+                      />
+                      <span
                         className={`relative cursor-pointer bg-white rounded-md font-medium ${formColor.text} hover:${formColor.text} focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 ${formColor.ring}`}
                       >
-                        <span>Upload a file</span>
-                        <input
-                          id="file-upload"
-                          name="file-upload"
-                          type="file"
-                          className="sr-only"
-                          accept=".jpg,.jpeg,.png,.pdf"
-                          onChange={(e) => {
-                            const file = e.target.files[0];
-                            setFileError('');
-                            if (file && file.size > 5 * 1024 * 1024) { // 5MB in bytes
-                              setFileError('File size must be less than 5MB');
-                              e.target.value = ''; // Reset the input
-                              return;
-                            }
-                            onChange({ target: { name: 'file', value: file } });
-                          }}
-                        />
-                      </label>
+                        Upload a file
+                      </span>
                       <p className="pl-1">or drag and drop</p>
                     </div>
                     <p className="text-xs text-gray-500">
@@ -128,7 +198,7 @@ const TransactionForm = ({ formData, isSubmitting, onSubmit, onChange, onCancel 
                     )}
                   </div>
                 </div>
-              </div>
+              </label>
             </div>
           </div>
 
@@ -137,14 +207,29 @@ const TransactionForm = ({ formData, isSubmitting, onSubmit, onChange, onCancel 
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm ${formColor.button} focus:outline-none focus:ring-2 ${formColor.ring} focus:ring-offset-2 ${
-                isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+              className={`inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm ${
+                formColor.button
+              } focus:outline-none focus:ring-2 ${
+                formColor.ring
+              } focus:ring-offset-2 ${
+                isSubmitting ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
               {isSubmitting ? (
                 <span className="flex items-center">
-                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <svg
+                    className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
                     <path
                       className="opacity-75"
                       fill="currentColor"
@@ -154,7 +239,7 @@ const TransactionForm = ({ formData, isSubmitting, onSubmit, onChange, onCancel 
                   Processing...
                 </span>
               ) : (
-                'Submit'
+                "Submit"
               )}
             </button>
             <button

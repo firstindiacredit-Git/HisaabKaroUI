@@ -70,12 +70,17 @@ const Second = () => {
   }, [animationProgress]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 py-8">
+    <div className="min-h-screen dark:bg-gray-900 bg-gray-100 py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-[30px] shadow-lg border-2 border-gray-100">
-          <Back />
+        <div className="bg-white dark:bg-gray-800 rounded-[30px] shadow-lg border-2 border-gray-100">
+          <div className="p-4 border-b flex items-center border-gray-100 dark:border-gray-700">
+            <span className="text-gray-900 flex items-center rounded-full bg-blue-50 dark:bg-gray-100/50 border border-gray-100 dark:border-gray-800 pr-4 dark:text-gray-100">
+              <Back />
+              Back
+            </span>
+          </div>
           <div className="p-6">
-            <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 text-center mb-8">
               Time Converter
             </h1>
 
@@ -84,7 +89,7 @@ const Second = () => {
               <div className="space-y-6">
                 {/* Seconds Input */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm dark:text-gray-300 font-medium text-gray-600 mb-2">
                     Enter Seconds
                   </label>
                   <div className="relative group">
@@ -93,7 +98,7 @@ const Second = () => {
                       value={secondsInput}
                       onChange={(e) => setSecondsInput(e.target.value)}
                       placeholder="Enter seconds"
-                      className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400 transition-colors peer"
+                      className="w-full px-4 py-3 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-900 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400 transition-colors peer"
                     />
                     <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 transition-opacity duration-200 group-hover:opacity-0 peer-focus:opacity-0">
                       sec
@@ -103,7 +108,7 @@ const Second = () => {
 
                 {/* Quick Presets */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm dark:text-gray-300 font-medium text-gray-600 mb-2">
                     Quick Presets
                   </label>
                   <div className="grid grid-cols-2 gap-2">
@@ -111,7 +116,7 @@ const Second = () => {
                       <button
                         key={name}
                         onClick={() => handlePresetClick(seconds)}
-                        className="px-3 py-2 rounded-lg text-sm font-medium bg-gray-50 text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                        className="px-3 py-2 rounded-lg text-sm font-medium dark:text-gray-300 bg-gray-50 dark:bg-gray-900 text-gray-700 hover:bg-gray-100 transition-colors duration-200"
                       >
                         {name}
                       </button>
@@ -122,7 +127,7 @@ const Second = () => {
                 {/* Convert Button */}
                 <button
                   onClick={handleConvert}
-                  className="w-full bg-indigo-600 text-white py-3 rounded-xl hover:bg-indigo-700 transition-colors duration-200"
+                  className="w-full bg-indigo-600 dark:bg-indigo-500  text-white py-3 rounded-xl hover:bg-indigo-700 transition-colors duration-200"
                 >
                   Convert
                 </button>
@@ -139,57 +144,59 @@ const Second = () => {
                 {formattedTime ? (
                   <>
                     {/* Time Display */}
-                    <div className="bg-white p-6 rounded-xl border border-gray-200">
+                    <div className="bg-white dark:bg-gray-900 dark:border-gray-900 p-6 rounded-xl border border-gray-200">
                       <div className="text-center mb-4">
                         <div className="text-4xl font-bold text-indigo-600 font-mono tracking-wider">
-                          {formattedTime.hours}:{formattedTime.minutes}:{formattedTime.seconds}
+                          {formattedTime.hours}:{formattedTime.minutes}:
+                          {formattedTime.seconds}
                         </div>
-                        <p className="text-sm text-gray-500 mt-2">
-                          Total: {formattedTime.totalSeconds.toLocaleString()} seconds
+                        <p className="text-sm dark:text-gray-300 text-gray-500 mt-2">
+                          Total: {formattedTime.totalSeconds.toLocaleString()}{" "}
+                          seconds
                         </p>
                       </div>
 
                       {/* Time Breakdown */}
                       <div className="grid grid-cols-3 gap-4 mt-6">
-                        <div className="p-3 bg-indigo-50 rounded-lg text-center">
+                        <div className="p-3 dark:bg-gray-800 bg-indigo-50 rounded-lg text-center">
                           <p className="text-2xl font-bold text-indigo-600">
                             {formattedTime.breakdown.hours}
                           </p>
-                          <p className="text-xs text-gray-600">Hours</p>
+                          <p className="text-xs dark:text-gray-300 text-gray-600">Hours</p>
                         </div>
-                        <div className="p-3 bg-purple-50 rounded-lg text-center">
+                        <div className="p-3 dark:bg-gray-800 bg-purple-50 rounded-lg text-center">
                           <p className="text-2xl font-bold text-purple-600">
                             {formattedTime.breakdown.minutes}
                           </p>
-                          <p className="text-xs text-gray-600">Minutes</p>
+                          <p className="text-xs dark:text-gray-300 text-gray-600">Minutes</p>
                         </div>
-                        <div className="p-3 bg-pink-50 rounded-lg text-center">
+                        <div className="p-3 dark:bg-gray-800 bg-pink-50 rounded-lg text-center">
                           <p className="text-2xl font-bold text-pink-600">
                             {formattedTime.breakdown.seconds}
                           </p>
-                          <p className="text-xs text-gray-600">Seconds</p>
+                          <p className="text-xs dark:text-gray-300 text-gray-600">Seconds</p>
                         </div>
                       </div>
                     </div>
 
                     {/* Progress Bar */}
-                    <div className="bg-white p-6 rounded-xl border border-gray-200">
-                      <h3 className="text-sm font-medium text-gray-600 mb-2">
+                    <div className="bg-white dark:bg-gray-900 dark:border-gray-900 p-6 rounded-xl border border-gray-200">
+                      <h3 className="text-sm dark:text-gray-300 font-medium text-gray-600 mb-2">
                         Percentage of Day (24 hours)
                       </h3>
-                      <div className="h-4 bg-gray-100 rounded-full overflow-hidden">
+                      <div className="h-4 dark:bg-gray-800 bg-gray-100 rounded-full overflow-hidden">
                         <div
                           className="progress-bar-fill h-full bg-gradient-to-r from-indigo-500 to-purple-500 transition-all duration-500"
-                          style={{ width: '0%' }}
+                          style={{ width: "0%" }}
                         ></div>
                       </div>
-                      <p className="text-xs text-gray-500 mt-2 text-right">
+                      <p className="text-xs dark:text-gray-300  text-gray-500 mt-2 text-right">
                         {animationProgress.toFixed(2)}%
                       </p>
                     </div>
                   </>
                 ) : (
-                  <div className="bg-white p-6 rounded-xl border border-gray-200 h-full flex flex-col items-center justify-center text-gray-500">
+                  <div className="bg-white dark:bg-gray-900 dark:border-gray-900  p-6 rounded-xl border border-gray-200 h-full flex flex-col items-center justify-center text-gray-500">
                     <svg
                       className="w-16 h-16 mb-4"
                       fill="none"
@@ -203,7 +210,9 @@ const Second = () => {
                         d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                       />
                     </svg>
-                    <p className="text-lg">Enter seconds to see the conversion</p>
+                    <p className="text-lg dark:text-gray-300 text-gray-500">
+                      Enter seconds to see the conversion
+                    </p>
                   </div>
                 )}
               </div>

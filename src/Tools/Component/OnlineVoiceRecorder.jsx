@@ -193,12 +193,17 @@ const OnlineVoiceRecorder = () => {
   };
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 py-8">
+    <div className="min-h-screen  dark:bg-gray-900 bg-gray-100 py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-[30px] shadow-lg border-2 border-gray-100">
-          <Back />
+        <div className="bg-white dark:bg-gray-800  dark:border-gray-800   rounded-[30px] shadow-lg  border-2 border-gray-100">
+          <div className="p-4 border-b flex items-center border-gray-100 dark:border-gray-800">
+            <span className="text-gray-900 flex items-center rounded-full bg-blue-50 dark:bg-gray-100/50 border border-gray-100 dark:border-gray-800 pr-4 dark:text-gray-100">
+              <Back />
+              Back
+            </span>
+          </div>
           <div className="p-6">
-            <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
+            <h1 className="text-3xl dark:text-gray-300  font-bold text-gray-900 text-center mb-8">
               Voice Recorder
             </h1>
 
@@ -210,15 +215,31 @@ const OnlineVoiceRecorder = () => {
                   disabled={isTesting || isRecording}
                   className="inline-flex items-center px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors relative group"
                 >
-                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                  <svg
+                    className="w-5 h-5 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+                    />
                   </svg>
                   Test Microphone
                 </button>
               </div>
 
               {testMessage && (
-                <div className={`text-center text-sm ${testMessage.includes('working') ? 'text-green-600' : 'text-red-600'}`}>
+                <div
+                  className={`text-center text-sm ${
+                    testMessage.includes("working")
+                      ? "text-green-600"
+                      : "text-red-600"
+                  }`}
+                >
                   {testMessage}
                 </div>
               )}
@@ -229,7 +250,7 @@ const OnlineVoiceRecorder = () => {
                   ref={canvasRef}
                   width={800}
                   height={100}
-                  className="w-full h-32 rounded-xl bg-slate-50"
+                  className="w-full h-32 rounded-xl dark:bg-gray-900 bg-slate-50"
                 />
                 {isRecording && (
                   <div className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
@@ -248,7 +269,11 @@ const OnlineVoiceRecorder = () => {
                     <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                       Start Recording
                     </span>
-                    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                    <svg
+                      className="w-8 h-8"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
                       <circle cx="10" cy="10" r="6" />
                     </svg>
                   </button>
@@ -259,15 +284,31 @@ const OnlineVoiceRecorder = () => {
                       className="p-4 bg-yellow-500 text-white rounded-full hover:bg-yellow-600 transition-colors shadow-lg group relative"
                     >
                       <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                        {isPaused ? 'Resume' : 'Pause'}
+                        {isPaused ? "Resume" : "Pause"}
                       </span>
                       {isPaused ? (
-                        <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                        <svg
+                          className="w-8 h-8"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                            clipRule="evenodd"
+                          />
                         </svg>
                       ) : (
-                        <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                        <svg
+                          className="w-8 h-8"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z"
+                            clipRule="evenodd"
+                          />
                         </svg>
                       )}
                     </button>
@@ -278,7 +319,11 @@ const OnlineVoiceRecorder = () => {
                       <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                         Stop Recording
                       </span>
-                      <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                      <svg
+                        className="w-8 h-8"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
                         <rect x="6" y="6" width="8" height="8" />
                       </svg>
                     </button>
@@ -297,8 +342,18 @@ const OnlineVoiceRecorder = () => {
                       onClick={downloadRecording}
                       className="inline-flex items-center px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
                     >
-                      <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                      <svg
+                        className="w-5 h-5 mr-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                        />
                       </svg>
                       Download Recording
                     </button>

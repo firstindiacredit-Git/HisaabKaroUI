@@ -139,12 +139,17 @@ const TextToSpeech = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 py-8">
+    <div className="min-h-screen dark:bg-gray-900 bg-gray-100 py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-[30px] shadow-lg border-2 border-gray-100">
-          <Back />
+        <div className="bg-white dark:border-gray-800 dark:bg-gray-800 rounded-[30px] shadow-lg border-2 border-gray-100">
+          <div className="p-4 border-b flex items-center border-gray-100 dark:border-gray-700">
+            <span className="text-gray-900 flex items-center rounded-full bg-blue-50 dark:bg-gray-100/50 border border-gray-100 dark:border-gray-800 pr-4 dark:text-gray-100">
+              <Back />
+              Back
+            </span>
+          </div>
           <div className="p-6">
-            <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
+            <h1 className="text-3xl font-bold dark:text-gray-300 text-gray-900 text-center mb-8">
               Text to Speech Converter
             </h1>
 
@@ -160,13 +165,23 @@ const TextToSpeech = () => {
                 />
                 <label
                   htmlFor="file-upload"
-                  className="cursor-pointer inline-flex items-center px-4 py-2 border border-gray-300 rounded-xl text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 relative group"
+                  className="cursor-pointer inline-flex items-center px-4 py-2 border  border-gray-300 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 dark:bg-gray-900 dark:border-gray-800 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 relative group"
                 >
-                  <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                  <span className="absolute -top-8 left-1/2 transform -translate-x-1/2  dark:bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                     Upload Text File (.txt)
                   </span>
-                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                  <svg
+                    className="w-5 h-5 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                    />
                   </svg>
                   Upload Text File
                 </label>
@@ -174,20 +189,20 @@ const TextToSpeech = () => {
 
               {/* Text Input */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium dark:text-gray-300   text-gray-700 mb-2">
                   Enter Text
                 </label>
                 <textarea
                   value={text}
                   onChange={(e) => setText(e.target.value)}
                   placeholder="Type or paste your text here..."
-                  className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400 transition-colors h-40"
+                  className="w-full px-4 py-3 dark:bg-gray-900 text-gray-700 dark:text-gray-300 dark:border-gray-900 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400 transition-colors h-40"
                 />
               </div>
 
               {/* Quick Presets */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium dark:text-gray-300   text-gray-700 mb-2">
                   Quick Presets
                 </label>
                 <div className="grid grid-cols-2 gap-2">
@@ -195,7 +210,7 @@ const TextToSpeech = () => {
                     <button
                       key={name}
                       onClick={() => handlePresetClick(value)}
-                      className="px-3 py-2 rounded-lg text-sm font-medium bg-gray-50 text-gray-700 hover:bg-gray-100 transition-colors duration-200 relative group"
+                      className="px-3 py-2 rounded-lg text-sm font-medium dark:bg-gray-900 bg-gray-50 dark:text-gray-300 text-gray-700 hover:bg-gray-100 transition-colors duration-200 relative group"
                     >
                       <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                         Click to use this preset text
@@ -208,12 +223,14 @@ const TextToSpeech = () => {
 
               {/* Voice Selection */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium dark:text-gray-300   text-gray-700 mb-2">
                   Select Voice
                 </label>
                 <select
-                  onChange={(e) => setSelectedVoice(availableVoices[e.target.value])}
-                  className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400 transition-colors"
+                  onChange={(e) =>
+                    setSelectedVoice(availableVoices[e.target.value])
+                  }
+                  className="w-full px-4 py-3 dark:bg-gray-900 text-gray-700 dark:text-gray-300 dark:border-gray-900 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400 transition-colors"
                 >
                   {availableVoices.map((voice, index) => (
                     <option key={index} value={index}>
@@ -225,7 +242,7 @@ const TextToSpeech = () => {
 
               {/* Speech Rate */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium dark:text-gray-300  text-gray-700 mb-2">
                   Speech Rate: {rate}x
                 </label>
                 <input
@@ -235,7 +252,7 @@ const TextToSpeech = () => {
                   step="0.1"
                   value={rate}
                   onChange={(e) => setRate(parseFloat(e.target.value))}
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                  className="w-full h-2 dark:bg-gray-900 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                 />
                 <div className="flex justify-between text-xs text-gray-500 mt-1">
                   <span>0.5x</span>
@@ -246,7 +263,7 @@ const TextToSpeech = () => {
               </div>
 
               {/* Audio Controls */}
-              <div className="bg-white p-6 rounded-xl border border-gray-200">
+              <div className="bg-white dark:bg-gray-900  dark:border-gray-900 p-6 rounded-xl border border-gray-200">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center space-x-2">
                     {!isPlaying ? (
@@ -255,12 +272,27 @@ const TextToSpeech = () => {
                         className="p-3 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition-colors relative group"
                         title={isPaused ? "Resume" : "Play"}
                       >
-                        <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                        <span className="absolute -top-8 left-1/2 transform -translate-x-1/2  bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                           {isPaused ? "Resume" : "Play"}
                         </span>
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <svg
+                          className="w-6 h-6"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
                         </svg>
                       </button>
                     ) : (
@@ -272,8 +304,18 @@ const TextToSpeech = () => {
                         <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                           Pause
                         </span>
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <svg
+                          className="w-6 h-6"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
                         </svg>
                       </button>
                     )}
@@ -285,9 +327,24 @@ const TextToSpeech = () => {
                       <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                         Stop
                       </span>
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z" />
+                      <svg
+                        className="w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"
+                        />
                       </svg>
                     </button>
                     <button
@@ -298,8 +355,18 @@ const TextToSpeech = () => {
                       <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                         Copy Text
                       </span>
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                      <svg
+                        className="w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"
+                        />
                       </svg>
                       {copySuccess && (
                         <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full">

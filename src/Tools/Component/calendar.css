@@ -1,0 +1,8 @@
+.dark .react-calendar {
+    width: 350px;
+    max-width: 100%;
+    background: transparent;
+    border: none;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.125em;
+}

@@ -193,7 +193,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen dark:bg-gray-900 bg-gray-50">
-      <div className="max-w-7xl bg-white dark:bg-gray-800 mx-auto p-4 sm:p-6">
+      <div className="w-full bg-white dark:bg-gray-900 mx-auto p-4 sm:p-6">
         {/* Header - Hidden on mobile */}
         <div className="hidden sm:block mb-8 text-center">
           <h1 className="text-3xl dark:text-white font-bold text-gray-800 mb-2">
@@ -211,7 +211,7 @@ const Home = () => {
         )}
 
         {/* Charts Section */}
-        <div className="grid grid-cols-1 dark:bg-gray-800 bg-white lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+        <div className="grid grid-cols-1 dark:bg-gray-900 bg-white lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
           <div className="bg-white dark:bg-gray-700 p-3 sm:p-6 rounded-xl sm:rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300">
             <h3 className="text-base dark:text-white sm:text-xl font-semibold text-gray-800 mb-1">
               Weekly Activity

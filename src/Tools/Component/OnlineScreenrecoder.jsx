@@ -99,12 +99,17 @@ const OnlineScreenrecoder = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 py-8">
+    <div className="min-h-screen dark:bg-gray-900 bg-gray-100 py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-[30px] shadow-lg border-2 border-gray-100">
-          <Back />
+        <div className="bg-white dark:bg-gray-800  dark:border-gray-800   rounded-[30px] shadow-lg border-2 border-gray-100">
+          <div className="p-4 border-b flex items-center border-gray-100 dark:border-gray-700">
+            <span className="text-gray-900 flex items-center rounded-full bg-blue-50 dark:bg-gray-100/50 border border-gray-100 dark:border-gray-800 pr-4 dark:text-gray-100">
+              <Back />
+              Back
+            </span>
+          </div>
           <div className="p-6">
-            <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
+            <h1 className="text-3xl dark:text-gray-300  font-bold text-gray-900 text-center mb-8">
               Screen Recorder
             </h1>
 
@@ -114,8 +119,8 @@ const OnlineScreenrecoder = () => {
                 <button
                   onClick={recording ? stopCapture : startCapture}
                   className={`relative group p-4 rounded-full shadow-lg transition-all duration-200 ${
-                    recording 
-                      ? "bg-red-500 hover:bg-red-600" 
+                    recording
+                      ? "bg-red-500 hover:bg-red-600"
                       : "bg-teal-500 hover:bg-teal-600"
                   }`}
                 >
@@ -123,11 +128,19 @@ const OnlineScreenrecoder = () => {
                     {recording ? "Stop Recording" : "Start Recording"}
                   </span>
                   {recording ? (
-                    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <svg
+                      className="w-8 h-8 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
                       <rect x="6" y="6" width="8" height="8" />
                     </svg>
                   ) : (
-                    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <svg
+                      className="w-8 h-8 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
                       <circle cx="10" cy="10" r="6" />
                     </svg>
                   )}
@@ -135,7 +148,7 @@ const OnlineScreenrecoder = () => {
               </div>
 
               {/* Video Preview */}
-              <div className="relative rounded-xl overflow-hidden bg-gray-900">
+              <div className="relative rounded-xl overflow-hidden dark:bg-gray-900">
                 {recording && (
                   <div className="absolute top-4 left-4 bg-red-500 text-white text-xs px-2 py-1 rounded-full flex items-center space-x-2">
                     <span className="animate-pulse w-2 h-2 bg-white rounded-full"></span>
@@ -152,7 +165,7 @@ const OnlineScreenrecoder = () => {
 
               {/* File Name Input */}
               <div className="max-w-md mx-auto">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm dark:text-gray-300 font-medium text-gray-700 mb-2">
                   Recording Name
                 </label>
                 <div className="relative rounded-lg shadow-sm">
@@ -160,7 +173,7 @@ const OnlineScreenrecoder = () => {
                     type="text"
                     value={fileName}
                     onChange={(e) => setFileName(e.target.value)}
-                    className="block w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-200 focus:border-teal-400 transition-colors"
+                    className="block w-full px-4 py-3 dark:bg-gray-900 text-gray-700 dark:text-gray-300 dark:border-gray-900  bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-200 focus:border-teal-400 transition-colors"
                     placeholder="Enter file name..."
                   />
                   <div className="absolute inset-y-0 right-0 flex items-center pr-3">
@@ -179,8 +192,18 @@ const OnlineScreenrecoder = () => {
                     <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                       Download Recording
                     </span>
-                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    <svg
+                      className="w-5 h-5 mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                      />
                     </svg>
                     Download
                   </button>
@@ -191,8 +214,18 @@ const OnlineScreenrecoder = () => {
                     <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                       Share Recording
                     </span>
-                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                    <svg
+                      className="w-5 h-5 mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                      />
                     </svg>
                     Share
                   </button>
