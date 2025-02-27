@@ -946,24 +946,7 @@ const CollaborativeBookRecords = () => {
       </div>
 
       <div className="flex flex-wrap dark:bg-gray-800 bg-white rounded-xl shadow-sm items-center gap-2 mt-2 sm:mt-0">
-        <Dropdown
-          menu={{
-            items: [
-              { value: 10, label: "10 per page" },
-              { value: 20, label: "20 per page" },
-              { value: 50, label: "50 per page" },
-              { value: 100, label: "100 per page" },
-            ],
-            onClick: ({ key }) => handlePageSizeChange(parseInt(key)),
-          }}
-          trigger={["click"]}
-        >
-          <Button className="flex items-center h-10 w-full sm:w-auto dark:bg-gray-700 dark:border-gray-800 bg-white/50 dark:text-gray-300 text-gray-800 rounded">
-            <Space>
-              <span className="font-semibold">{pageSize} per page</span>
-            </Space>
-          </Button>
-        </Dropdown>
+       
         <div className="flex dark:bg-gray-800 bg-white rounded-xl shadow-sm items-center gap-2">
           <Button
             onClick={() => handlePageChange(currentPage - 1)}
@@ -1131,7 +1114,7 @@ const CollaborativeBookRecords = () => {
       </div>
 
       {/* Desktop View */}
-      <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {/* Book Card */}
         <div className="relative group">
           <div className="absolute inset-0  rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-200"></div>
@@ -1156,40 +1139,6 @@ const CollaborativeBookRecords = () => {
             </div>
             <p className="text-gray-700 dark:text-gray-300 font-medium text-sm sm:text-base truncate">
               {transaction.bookId.bookname}
-            </p>
-          </div>
-        </div>
-
-        {/* Balance Card */}
-        <div className="relative group">
-          <div className="absolute inset-0  rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-200"></div>
-          <div className="relative dark:bg-gray-800 bg-white ring-1 ring-gray-200 dark:ring-gray-800 rounded-xl p-3 sm:p-6 transition-shadow duration-200">
-            <div className="text-amber-600 mb-1 sm:mb-2 flex items-center">
-              <svg
-                className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <span className="font-semibold text-sm sm:text-base">
-                Balance
-              </span>
-            </div>
-            <p className="text-gray-700 dark:text-gray-300 font-medium text-sm sm:text-base">
-              {Math.abs(transaction.outstandingBalance).toLocaleString(
-                "en-IN",
-                {
-                  maximumFractionDigits: 2,
-                  minimumFractionDigits: 2,
-                }
-              )}
             </p>
           </div>
         </div>
@@ -1223,7 +1172,7 @@ const CollaborativeBookRecords = () => {
         </div>
 
         {/* Client Card */}
-        <div className="relative group">
+        {/* <div className="relative group">
           <div className="absolute inset-0  rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-200"></div>
           <div className="relative dark:bg-gray-800 bg-white ring-1 ring-gray-200 dark:ring-gray-800 rounded-xl p-3 sm:p-6 transition-shadow duration-200">
             <div className="text-purple-600 mb-1 sm:mb-2 flex items-center">
@@ -1246,6 +1195,41 @@ const CollaborativeBookRecords = () => {
             </div>
             <p className="text-gray-700 dark:text-gray-300 font-medium text-sm sm:text-base truncate">
               {transaction.clientUserId.name}
+            </p>
+          </div>
+        </div> */}
+
+
+        {/* Balance Card */}
+        <div className="relative group">
+          <div className="absolute inset-0  rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-200"></div>
+          <div className="relative dark:bg-gray-800 bg-white ring-1 ring-gray-200 dark:ring-gray-800 rounded-xl p-3 sm:p-6 transition-shadow duration-200">
+            <div className="text-amber-600 mb-1 sm:mb-2 flex items-center">
+              <svg
+                className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span className="font-semibold text-sm sm:text-base">
+                Balance
+              </span>
+            </div>
+            <p className="text-gray-700 dark:text-gray-300 font-medium text-sm sm:text-base">
+              {Math.abs(transaction.outstandingBalance).toLocaleString(
+                "en-IN",
+                {
+                  maximumFractionDigits: 2,
+                  minimumFractionDigits: 2,
+                }
+              )}
             </p>
           </div>
         </div>
@@ -1377,22 +1361,7 @@ const CollaborativeBookRecords = () => {
       </div>
 
       <div className="flex justify-end items-center">
-        <Dropdown
-          menu={{
-            items: [
-              { key: 10, label: "10 per page" },
-              { key: 20, label: "20 per page" },
-              { key: 50, label: "50 per page" },
-              { key: 100, label: "100 per page" },
-            ],
-            onClick: ({ key }) => handlePageSizeChange(parseInt(key)),
-          }}
-          trigger={["click"]}
-        >
-          <Button className="flex items-center justify-center px-3 py-1.5 bg-white border border-gray-300 rounded-md shadow-sm">
-            <span className="text-sm">Show: {pageSize}</span>
-          </Button>
-        </Dropdown>
+        
       </div>
     </div>
   );
@@ -1708,8 +1677,8 @@ const CollaborativeBookRecords = () => {
                               key={history._id}
                               className={`${
                                 history?.transactionType === "you will give"
-                                  ? "hover:bg-green-50 dark:hover:bg-green-300"
-                                  : "hover:bg-red-50 dark:hover:bg-red-300"
+                                  ? "hover:bg-green-50 dark:hover:bg-gray-500"
+                                  : "hover:bg-red-50 dark:hover:bg-gray-500"
                               }`}
                             >
                               <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
@@ -1988,7 +1957,7 @@ const CollaborativeBookRecords = () => {
               ></div>
 
               {/* Modal panel */}
-              <div className="inline-block align-bottom bg-white rounded-xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle w-full sm:max-w-lg">
+              <div className="inline-block w-full align-bottom bg-white rounded-xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg">
                 <div className="w-full">
                   <TransactionForm
                     formData={formData}

@@ -119,11 +119,16 @@ const TestCalculator = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 py-4 px-2 sm:px-4">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 py-4 px-2 sm:px-4">
       <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-[20px] sm:rounded-[30px] shadow-md border-2 border-gray-100 overflow-hidden">
-          <Back />
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-4 sm:mb-8 px-4">
+        <div className="bg-white dark:bg-gray-800 dark:border-gray-800 rounded-[20px] sm:rounded-[30px] shadow-md border-2 border-gray-100 overflow-hidden">
+          <div className="p-4 border-b flex items-center border-gray-100 dark:border-gray-700">
+            <span className="text-gray-900 flex items-center rounded-full bg-blue-50 dark:bg-gray-100/50 border border-gray-100 dark:border-gray-800 pr-4 dark:text-gray-100">
+              <Back />
+              Back
+            </span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 text-center mb-4 sm:mb-8 px-4">
             Test Score Calculator
           </h1>
 
@@ -133,7 +138,7 @@ const TestCalculator = () => {
               <div className="space-y-4 sm:space-y-6">
                 {/* Test Templates */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-600 mb-2">
+                  <label className="block text-sm dark:text-gray-300 font-medium text-gray-600 mb-2">
                     Quick Templates
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -142,7 +147,7 @@ const TestCalculator = () => {
                         key={name}
                         type="button"
                         onClick={() => handleTemplateChange(questions)}
-                        className="px-3 py-2 rounded-lg font-medium text-sm transition-colors duration-200 bg-white text-gray-700 border border-gray-200 hover:bg-gray-50"
+                        className="px-3 py-2 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-900 rounded-lg font-medium text-sm transition-colors duration-200 bg-white text-gray-700 border border-gray-200 hover:bg-gray-50"
                       >
                         {name}
                       </button>
@@ -152,21 +157,23 @@ const TestCalculator = () => {
 
                 {/* Total Questions Input */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-600 mb-2">
+                  <label className="block text-sm dark:text-gray-300 font-medium text-gray-600 mb-2">
                     Total Questions
                   </label>
                   <input
                     type="number"
                     min="1"
                     value={totalQuestions}
-                    onChange={(e) => setTotalQuestions(parseInt(e.target.value) || 0)}
-                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400 transition-colors"
+                    onChange={(e) =>
+                      setTotalQuestions(parseInt(e.target.value) || 0)
+                    }
+                    className="w-full px-4 py-3 bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400 transition-colors"
                   />
                 </div>
 
                 {/* Wrong Answers Input */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-600 mb-2">
+                  <label className="block text-sm dark:text-gray-300 font-medium text-gray-600 mb-2">
                     Wrong Answers
                   </label>
                   <div className="flex flex-col sm:flex-row gap-2 sm:space-x-3">
@@ -175,8 +182,10 @@ const TestCalculator = () => {
                       min="0"
                       max={totalQuestions}
                       value={wrongAnswers}
-                      onChange={(e) => setWrongAnswers(parseInt(e.target.value) || 0)}
-                      className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400 transition-colors"
+                      onChange={(e) =>
+                        setWrongAnswers(parseInt(e.target.value) || 0)
+                      }
+                      className="w-full px-4 py-3 bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-900 rounded-xl focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400 transition-colors"
                     />
                     <button
                       onClick={addWrongAnswer}
@@ -188,19 +197,26 @@ const TestCalculator = () => {
                 </div>
 
                 {/* Grade Scale */}
-                <div className="bg-gray-50 p-4 rounded-xl">
-                  <h3 className="text-sm font-medium text-gray-600 mb-2">Grade Scale</h3>
+                <div className="bg-gray-50 dark:bg-gray-900  p-4 rounded-xl">
+                  <h3 className="text-sm dark:text-gray-300   font-medium text-gray-600 mb-2">
+                    Grade Scale
+                  </h3>
                   <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
-                    {Object.entries(gradeScale).map(([grade, { min, color }]) => (
-                      <div
-                        key={grade}
-                        className="text-center p-2 rounded"
-                        style={{ backgroundColor: color + "20", color: color }}
-                      >
-                        <div className="font-medium">{grade}</div>
-                        <div className="text-xs">{min}%+</div>
-                      </div>
-                    ))}
+                    {Object.entries(gradeScale).map(
+                      ([grade, { min, color }]) => (
+                        <div
+                          key={grade}
+                          className="text-center p-2 rounded"
+                          style={{
+                            backgroundColor: color + "20",
+                            color: color,
+                          }}
+                        >
+                          <div className="font-medium">{grade}</div>
+                          <div className="text-xs">{min}%+</div>
+                        </div>
+                      )
+                    )}
                   </div>
                 </div>
 
@@ -224,10 +240,12 @@ const TestCalculator = () => {
               <div className="space-y-4 sm:space-y-6">
                 {result ? (
                   <>
-                    <div className="bg-white p-4 sm:p-6 rounded-xl border border-gray-200">
+                    <div className="bg-white dark:bg-gray-900 dark:border-gray-900 p-4 sm:p-6 rounded-xl border border-gray-200">
                       <div className="grid grid-cols-2 gap-3 sm:gap-4">
                         <div className="p-3 sm:p-4 bg-indigo-50 rounded-lg sm:h-32 flex flex-col justify-center">
-                          <p className="text-sm text-gray-600">Total Questions</p>
+                          <p className="text-sm text-gray-600">
+                            Total Questions
+                          </p>
                           <p className="text-xl sm:text-2xl font-bold text-indigo-600 mt-2">
                             {result.total}
                           </p>
@@ -236,7 +254,7 @@ const TestCalculator = () => {
                           className="p-3 sm:p-4 rounded-lg sm:h-32 flex flex-col justify-center"
                           style={{ backgroundColor: result.gradeColor + "20" }}
                         >
-                          <p className="text-sm text-gray-600">Letter Grade</p>
+                          <p className="text-sm dark:text-gray-300 text-gray-600">Letter Grade</p>
                           <p
                             className="text-xl sm:text-2xl font-bold mt-2"
                             style={{ color: result.gradeColor }}
@@ -244,8 +262,8 @@ const TestCalculator = () => {
                             {result.letterGrade}
                           </p>
                         </div>
-                        <div className="p-3 sm:p-4 bg-green-50 rounded-lg sm:h-32 flex flex-col justify-center">
-                          <p className="text-sm text-gray-600">Score</p>
+                        <div className="p-3 sm:p-4 dark:bg-gray-800 dark:text-gray-300 bg-green-50 rounded-lg sm:h-32 flex flex-col justify-center">
+                          <p className="text-sm dark:text-gray-300 text-gray-600">Score</p>
                           <p className="text-xl sm:text-2xl font-bold text-green-600 mt-2">
                             {result.percentage}%
                           </p>
@@ -258,8 +276,8 @@ const TestCalculator = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="bg-white p-4 sm:p-6 rounded-xl border border-gray-200">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                    <div className="bg-white dark:bg-gray-900 dark:border-gray-900 p-4 sm:p-6 rounded-xl border border-gray-200">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
                         Score Distribution
                       </h3>
                       <div className="h-48 sm:h-64">
@@ -268,7 +286,7 @@ const TestCalculator = () => {
                     </div>
                   </>
                 ) : (
-                  <div className="bg-white p-6 rounded-xl border border-gray-200 h-full flex flex-col items-center justify-center text-gray-500">
+                  <div className="bg-white dark:bg-gray-900 dark:border-gray-900 p-6 rounded-xl border border-gray-200 h-full flex flex-col items-center justify-center text-gray-500">
                     <svg
                       className="w-12 h-12 sm:w-16 sm:h-16 mb-4"
                       fill="none"

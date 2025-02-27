@@ -122,6 +122,7 @@ import SavedInvoices from "./pages/invoice/SavedInvoices.jsx";
 import SentInvoices from "./pages/invoice/SentInvoices.jsx";  
 import ReceivedInvoices from "./pages/invoice/ReceivedInvoices.jsx";
 import ViewInvoice from "./pages/invoice/ViewInvoice.jsx";
+import Password from "./pages/password/password.jsx";
 const GlobalStyle = createGlobalStyle`
   * {
     scrollbar-width: none !important;
@@ -399,6 +400,7 @@ function App() {
                       path="/transaction-details/:transactionId"
                       element={<CollaborativeBookRecords />}
                     />
+                    <Route path="/password" element={<Password />} />
                     <Route path="/saved-invoices" element={<SavedInvoices />} />
                     <Route path="/sent-invoices" element={<SentInvoices />} />
                     <Route path="/received-invoices" element={<ReceivedInvoices />} />
