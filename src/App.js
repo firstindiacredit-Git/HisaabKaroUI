@@ -54,7 +54,6 @@ import ResumeBuild from "./Tools/Component/ResumeBuild.jsx";
 import Grocery from "./Tools/Component/Grocery.jsx";
 import Bmi from "./Tools/Component/Bmi.jsx";
 import LinkChecker from "./Tools/Component/LinkChecker.jsx";
-import Percentages from "./Tools/Component/Percentage.jsx";
 import ImageToPdf from "./Tools/Component/ImageToPdf.jsx";
 import SplitPdf from "./Tools/Component/SplitPdf.jsx";
 // import NewTab from './NewTab.jsx';

@@ -247,6 +247,7 @@ const TransactionTable = forwardRef(
             setSelectedDescription={setSelectedDescription}
             setShowDescriptionModal={setShowDescriptionModal}
             onWhatsAppReminder={handleWhatsAppReminder}
+            transaction={transaction}
           />
         )}
 

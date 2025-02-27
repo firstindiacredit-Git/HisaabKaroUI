@@ -64,7 +64,7 @@ const Layout = () => {
                 <div className="mb-16">
                   <Header />
                 </div>
-                <div className="pb-20 ">
+                <div className="pb-16 ">
                   <Outlet />
                 </div>
                 <div className="md:hidden block">

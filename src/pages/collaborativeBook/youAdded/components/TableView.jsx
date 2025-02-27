@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { MdEdit, MdDelete } from "react-icons/md";
 import {
   AiOutlineFileImage,
   AiOutlineCheckCircle,
   AiOutlineClockCircle,
   AiOutlineInfoCircle,
+  AiOutlineSend,
+  AiOutlineMessage,
+  AiOutlineEye,
 } from "react-icons/ai";
 import { BsFilePdf } from "react-icons/bs";
 import { BiGitBranch } from "react-icons/bi";
 import { formatDate, formatAmountWithoutPrefix } from '../utils/formatters';
+import { ResponseModal } from './modals/ResponseModal';
+import { ViewResponseModal } from './modals/ViewResponseModal';
 
 export const TableView = ({
   paginatedTransactions,
   userId,
-  updating,
+  updatingId,
   handleEditClick,
   handleDeleteClick,
   handleFileClick,
@@ -21,10 +26,101 @@ export const TableView = ({
   updateTransactionStatus,
   setSelectedDescription,
   setShowDescriptionModal,
+  transaction,
 }) => {
+  const [responseModal, setResponseModal] = useState({ isOpen: false, entryId: null });
+  const [viewResponseModal, setViewResponseModal] = useState({ isOpen: false, response: null });
+  const [currentResponse, setCurrentResponse] = useState('');
+  const [submittingResponse, setSubmittingResponse] = useState(null);
+  const [responses, setResponses] = useState({});
+
+  const fetchResponses = async (transactionId) => {
+    try {
+      const response = await fetch(`http://localhost:5100/api/response/get-response/${transactionId}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      if (response.ok) {
+        const data = await response.json();
+        // Transform responses array into a map with transactionEntryId as key
+        const responseMap = data.responses.reduce((acc, response) => {
+          acc[response.transactionEntryId] = response;
+          return acc;
+        }, {});
+        setResponses(responseMap);
+      }
+    } catch (error) {
+      console.error('Error fetching responses:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (transaction?._id) {
+      fetchResponses(transaction._id);
+    }
+  }, [transaction?._id]);
+
+  const handleResponseSubmit = async () => {
+    if (!currentResponse?.trim() || !responseModal.entryId) return;
+
+    setSubmittingResponse(responseModal.entryId);
+    try {
+      const response = await fetch('http://localhost:5100/api/response/add-response', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({
+          transactionId: transaction._id,
+          transactionEntryId: responseModal.entryId,
+          responseMessage: currentResponse
+        })
+      });
+
+      if (response.ok) {
+        setCurrentResponse('');
+        setResponseModal({ isOpen: false, entryId: null });
+        // Fetch updated responses after adding a new one
+        await fetchResponses(transaction._id);
+      } else {
+        const errorData = await response.json();
+        console.error('Failed to submit response:', errorData);
+      }
+    } catch (error) {
+      console.error('Error submitting response:', error);
+    } finally {
+      setSubmittingResponse(null);
+    }
+  };
+
+  const openResponseModal = (entryId) => {
+    if (!transaction?._id) {
+      console.error('Transaction ID is missing');
+      return;
+    }
+    setResponseModal({ isOpen: true, entryId });
+    setCurrentResponse('');
+  };
+
+  const closeResponseModal = () => {
+    setResponseModal({ isOpen: false, entryId: null });
+    setCurrentResponse('');
+  };
+
+  const openViewResponseModal = (response) => {
+    setViewResponseModal({ isOpen: true, response });
+  };
+
+  const closeViewResponseModal = () => {
+    setViewResponseModal({ isOpen: false, response: null });
+  };
+
   return (
     <div>
-      {/* Desktop View (unchanged) */}
+      {/* Desktop View */}
       <div className="hidden md:block overflow-x-auto">
         <table className="min-w-full divide-y dark:divide-gray-600 divide-gray-200">
           <thead className="bg-gray-50 dark:bg-gray-700">
@@ -137,10 +233,22 @@ export const TableView = ({
                         <span className="text-sm">Confirmed</span>
                       </>
                     ) : (
-                      <>
-                        <AiOutlineClockCircle className="w-4 h-4 mr-1" />
-                        <span className="text-sm">Pending</span>
-                      </>
+                      userId !== entry.initiaterId ? (
+                        <button
+                          onClick={() => updateTransactionStatus(entry._id)}
+                          disabled={updatingId === entry._id}
+                          className={`px-3 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600 transition-colors ${
+                            updatingId === entry._id ? 'opacity-50 cursor-not-allowed' : ''
+                          }`}
+                        >
+                          {updatingId === entry._id ? "Updating..." : "Confirm"}
+                        </button>
+                      ) : (
+                        <div className="flex items-center">
+                          <AiOutlineClockCircle className="w-4 h-4 mr-1" />
+                          <span className="text-sm">Pending</span>
+                        </div>
+                      )
                     )}
                   </span>
                 </td>
@@ -170,15 +278,26 @@ export const TableView = ({
                           <BiGitBranch className="w-4 h-4" />
                         </button>
                       </>
-                    ) : entry.confirmationStatus === "pending" ? (
-                      <button
-                        onClick={() => updateTransactionStatus(entry._id)}
-                        disabled={updating}
-                        className="px-3 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600 transition-colors disabled:opacity-50"
-                      >
-                        {updating ? "Updating..." : "Confirm"}
-                      </button>
-                    ) : null}
+                    ) : (
+                      <>
+                        <button
+                          onClick={() => openResponseModal(entry._id)}
+                          className="p-1.5 rounded-full hover:bg-gray-100 transition-colors text-blue-600"
+                          title="Add Response"
+                        >
+                          <AiOutlineMessage className="w-4 h-4" />
+                        </button>
+                        {responses[entry._id] && (
+                          <button
+                            onClick={() => openViewResponseModal(responses[entry._id])}
+                            className="p-1.5 rounded-full hover:bg-gray-100 transition-colors text-green-600"
+                            title="View Response"
+                          >
+                            <AiOutlineEye className="w-4 h-4" />
+                          </button>
+                        )}
+                      </>
+                    )}
                   </div>
                 </td>
               </tr>
@@ -238,6 +357,16 @@ export const TableView = ({
                     }`}>
                       {entry.confirmationStatus === "confirmed" ? (
                         <AiOutlineCheckCircle className="w-3.5 h-3.5" />
+                      ) : userId !== entry.initiaterId ? (
+                        <button
+                          onClick={() => updateTransactionStatus(entry._id)}
+                          disabled={updatingId === entry._id}
+                          className={`px-2 py-0.5 bg-blue-500 text-white text-xs rounded hover:bg-blue-600 ${
+                            updatingId === entry._id ? 'opacity-50 cursor-not-allowed' : ''
+                          }`}
+                        >
+                          {updatingId === entry._id ? "..." : "Confirm"}
+                        </button>
                       ) : (
                         <AiOutlineClockCircle className="w-3.5 h-3.5" />
                       )}
@@ -247,66 +376,79 @@ export const TableView = ({
 
                 {/* Actions Column */}
                 <td className="col-span-4">
-                  <div className="flex items-center justify-end gap-1">
-                    {/* File and Description Buttons */}
-                    {entry.file && (
-                      <button
-                        onClick={() => handleFileClick({ ...entry })}
-                        className="p-1 text-blue-600"
-                      >
-                        {entry.file.toLowerCase().endsWith('.pdf') ? (
-                          <BsFilePdf className="w-3.5 h-3.5" />
-                        ) : (
-                          <AiOutlineFileImage className="w-3.5 h-3.5" />
-                        )}
-                      </button>
-                    )}
-                    {entry.description && (
-                      <button
-                        onClick={() => {
-                          setSelectedDescription(entry.description);
-                          setShowDescriptionModal(true);
-                        }}
-                        className="p-1 text-blue-600"
-                      >
-                        <AiOutlineInfoCircle className="w-3.5 h-3.5" />
-                      </button>
-                    )}
+                  <div className="flex flex-col items-end gap-2">
+                    <div className="flex items-center justify-end gap-1">
+                      {/* File and Description Buttons */}
+                      {entry.file && (
+                        <button
+                          onClick={() => handleFileClick({ ...entry })}
+                          className="p-1 text-blue-600"
+                        >
+                          {entry.file.toLowerCase().endsWith('.pdf') ? (
+                            <BsFilePdf className="w-3.5 h-3.5" />
+                          ) : (
+                            <AiOutlineFileImage className="w-3.5 h-3.5" />
+                          )}
+                        </button>
+                      )}
+                      {entry.description && (
+                        <button
+                          onClick={() => {
+                            setSelectedDescription(entry.description);
+                            setShowDescriptionModal(true);
+                          }}
+                          className="p-1 text-blue-600"
+                        >
+                          <AiOutlineInfoCircle className="w-3.5 h-3.5" />
+                        </button>
+                      )}
 
-                    {/* Action Buttons */}
-                    {userId === entry.initiaterId ? (
-                      <>
-                        <button
-                          onClick={() => handleEditClick(entry)}
-                          className="p-1 text-yellow-500"
-                          title="Edit"
-                        >
-                          <MdEdit className="w-3.5 h-3.5" />
-                        </button>
-                        <button
-                          onClick={() => handleDeleteClick(entry)}
-                          className="p-1 text-red-500"
-                          title="Delete"
-                        >
-                          <MdDelete className="w-3.5 h-3.5" />
-                        </button>
-                        <button
-                          onClick={() => handleSplitClick(entry)}
-                          className="p-1 text-blue-500"
-                          title="Split Transaction"
-                        >
-                          <BiGitBranch className="w-3.5 h-3.5" />
-                        </button>
-                      </>
-                    ) : entry.confirmationStatus === "pending" ? (
-                      <button
-                        onClick={() => updateTransactionStatus(entry._id)}
-                        disabled={updating}
-                        className="px-2 py-0.5 bg-blue-500 text-white text-xs rounded hover:bg-blue-600 disabled:opacity-50"
-                      >
-                        {updating ? "..." : "Confirm"}
-                      </button>
-                    ) : null}
+                      {/* Action Buttons */}
+                      {userId === entry.initiaterId ? (
+                        <>
+                          <button
+                            onClick={() => handleEditClick(entry)}
+                            className="p-1 text-yellow-500"
+                            title="Edit"
+                          >
+                            <MdEdit className="w-3.5 h-3.5" />
+                          </button>
+                          <button
+                            onClick={() => handleDeleteClick(entry)}
+                            className="p-1 text-red-500"
+                            title="Delete"
+                          >
+                            <MdDelete className="w-3.5 h-3.5" />
+                          </button>
+                          <button
+                            onClick={() => handleSplitClick(entry)}
+                            className="p-1 text-blue-500"
+                            title="Split Transaction"
+                          >
+                            <BiGitBranch className="w-3.5 h-3.5" />
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <button
+                            onClick={() => openResponseModal(entry._id)}
+                            className="p-1 text-blue-600"
+                            title="Add Response"
+                          >
+                            <AiOutlineMessage className="w-3.5 h-3.5" />
+                          </button>
+                          {responses[entry._id] && (
+                            <button
+                              onClick={() => openViewResponseModal(responses[entry._id])}
+                              className="p-1 text-green-600"
+                              title="View Response"
+                            >
+                              <AiOutlineEye className="w-3.5 h-3.5" />
+                            </button>
+                          )}
+                        </>
+                      )}
+                    </div>
                   </div>
                 </td>
               </tr>
@@ -314,7 +456,23 @@ export const TableView = ({
           </tbody>
         </table>
       </div>
+
+      {/* ViewResponseModal */}
+      <ViewResponseModal
+        isOpen={viewResponseModal.isOpen}
+        onClose={closeViewResponseModal}
+        response={viewResponseModal.response}
+      />
+
+      {/* Response Modal */}
+      <ResponseModal
+        isOpen={responseModal.isOpen}
+        onClose={closeResponseModal}
+        onSubmit={handleResponseSubmit}
+        response={currentResponse}
+        setResponse={setCurrentResponse}
+        isSubmitting={submittingResponse === responseModal.entryId}
+      />
     </div>
   );
 };
-

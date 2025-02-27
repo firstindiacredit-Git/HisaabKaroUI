@@ -10,7 +10,7 @@ const DeleteConfirmationModal = ({ show, message, onConfirm, onClose }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black/50 dark:bg-gray-900/80 backdrop-blur-sm flex items-center justify-center z-50"
           onClick={onClose}
         >
           <motion.div
@@ -18,8 +18,8 @@ const DeleteConfirmationModal = ({ show, message, onConfirm, onClose }) => {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="bg-white p-6 rounded-lg shadow-xl max-w-md w-full mx-4"
-            onClick={e => e.stopPropagation()}
+            className="bg-white dark:bg-gray-800 dark:text-gray-200 p-6 rounded-lg shadow-xl max-w-md w-full mx-4"
+            onClick={(e) => e.stopPropagation()}
           >
             <div className="text-center">
               <motion.div
@@ -28,7 +28,7 @@ const DeleteConfirmationModal = ({ show, message, onConfirm, onClose }) => {
                 transition={{ duration: 0.3 }}
                 className="w-16 h-16 mx-auto mb-4"
               >
-                <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-red-100 dark:bg-red-200 flex items-center justify-center">
                   <motion.svg
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
@@ -51,7 +51,7 @@ const DeleteConfirmationModal = ({ show, message, onConfirm, onClose }) => {
               <motion.h3
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-xl font-bold text-gray-900 mb-4"
+                className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4"
               >
                 Delete Transaction
               </motion.h3>
@@ -60,11 +60,13 @@ const DeleteConfirmationModal = ({ show, message, onConfirm, onClose }) => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="text-gray-600 mb-6"
+                className="text-gray-600 dark:text-gray-400 mb-6"
               >
                 {message}
                 <br />
-                <span className="text-red-500">This action cannot be undone.</span>
+                <span className="text-red-500 dark:text-red-400">
+                  This action cannot be undone.
+                </span>
               </motion.p>
 
               <div className="flex gap-3">
@@ -80,7 +82,7 @@ const DeleteConfirmationModal = ({ show, message, onConfirm, onClose }) => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={onClose}
-                  className="flex-1 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
+                  className="flex-1 bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 px-4 py-2 rounded-lg font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
                 >
                   Cancel
                 </motion.button>

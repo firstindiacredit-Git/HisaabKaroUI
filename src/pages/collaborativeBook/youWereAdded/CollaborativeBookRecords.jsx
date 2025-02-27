@@ -1668,7 +1668,7 @@ const CollaborativeBookRecords = () => {
               {isMobile ? (
                 renderMobileTransactionList()
               ) : viewMode === "list" ? (
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto pb-4">
                   <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                     <thead className="dark:bg-gray-800 bg-gray-50">
                       <tr>
@@ -2023,4 +2023,3 @@ export default CollaborativeBookRecords;
     border-color: transparent !important;
   }
 `}</style>;
-

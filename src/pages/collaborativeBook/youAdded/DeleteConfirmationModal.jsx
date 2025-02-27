@@ -2,6 +2,13 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm, transactionDetails }) => {
+  // Format transaction amount without currency symbol
+  const formattedAmount = transactionDetails
+    ? new Intl.NumberFormat('en-US').format(Math.abs(transactionDetails.amount))
+    : '';
+
+  const transactionType = transactionDetails?.amount < 0 ? 'Expense' : 'Income';
+
   return (
     <AnimatePresence mode="wait">
       {isOpen && (
@@ -10,7 +17,7 @@ const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm, transactionDetail
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black/50 dark:bg-gray-900/80 backdrop-blur-sm flex items-center justify-center z-50"
           onClick={onClose}
         >
           <motion.div
@@ -18,8 +25,8 @@ const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm, transactionDetail
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="bg-white p-6 rounded-lg shadow-xl max-w-md w-full mx-4"
-            onClick={e => e.stopPropagation()}
+            className="bg-white dark:bg-gray-800 dark:text-gray-200 p-6 rounded-lg shadow-xl max-w-md w-full mx-4"
+            onClick={(e) => e.stopPropagation()}
           >
             <div className="text-center">
               <motion.div
@@ -28,7 +35,7 @@ const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm, transactionDetail
                 transition={{ duration: 0.5 }}
                 className="w-16 h-16 mx-auto mb-4"
               >
-                <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-red-100 dark:bg-red-200 flex items-center justify-center">
                   <motion.svg
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
@@ -51,7 +58,7 @@ const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm, transactionDetail
               <motion.h3
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-xl font-bold text-gray-900 mb-4"
+                className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4"
               >
                 Delete Transaction?
               </motion.h3>
@@ -60,12 +67,12 @@ const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm, transactionDetail
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="text-gray-600 mb-6"
+                className="text-gray-600 dark:text-gray-400 mb-6"
               >
                 Are you sure you want to delete this transaction? This action cannot be undone.
                 {transactionDetails && (
-                  <span className="block mt-2 text-sm">
-                    Amount: {Math.abs(transactionDetails.amount)}
+                  <span className="block mt-2 text-sm dark:text-gray-300">
+                    <strong>{transactionType}</strong>: {formattedAmount}
                   </span>
                 )}
               </motion.p>
@@ -83,7 +90,7 @@ const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm, transactionDetail
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={onClose}
-                  className="flex-1 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
+                  className="flex-1 bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 px-4 py-2 rounded-lg font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
                 >
                   Cancel
                 </motion.button>

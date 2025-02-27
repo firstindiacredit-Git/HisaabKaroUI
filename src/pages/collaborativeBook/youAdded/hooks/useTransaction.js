@@ -4,7 +4,7 @@ import { normalizeFileUrl, handleFileUrl } from '../../../../utils/urlUtils';
 export const useTransaction = (transactionId) => {
   const [transaction, setTransaction] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [updating, setUpdating] = useState(false);
+  const [updatingId, setUpdatingId] = useState(null);
   const [errorModal, setErrorModal] = useState({ isOpen: false, message: "" });
   const [successModal, setSuccessModal] = useState({ isOpen: false, message: "" });
 
@@ -35,7 +35,7 @@ export const useTransaction = (transactionId) => {
   };
 
   const updateTransactionStatus = async (entryId) => {
-    setUpdating(true);
+    setUpdatingId(entryId);
     const token = localStorage.getItem("token");
     try {
       const response = await fetch(
@@ -89,14 +89,14 @@ export const useTransaction = (transactionId) => {
         message: "An error occurred while updating the status."
       });
     } finally {
-      setUpdating(false);
+      setUpdatingId(null);
     }
   };
 
   return {
     transaction,
     loading,
-    updating,
+    updatingId,
     errorModal,
     successModal,
     setErrorModal,

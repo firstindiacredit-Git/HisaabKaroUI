@@ -7,13 +7,13 @@ const ErrorModal = ({ isOpen, message, onClose }) => {
   return (
     <LazyMotion features={domAnimation}>
       <motion.div
-        className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[60]"
+        className="fixed inset-0 flex items-center justify-center bg-black/50 dark:bg-gray-900/80 backdrop-blur-sm z-[60]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
         <motion.div
-          className="bg-white p-6 rounded-md shadow-lg text-center"
+          className="bg-white dark:bg-gray-800 dark:text-gray-200 p-6 rounded-md shadow-lg text-center"
           initial={{ scale: 0.8 }}
           animate={{ scale: 1 }}
           exit={{ scale: 0.8 }}
@@ -23,7 +23,7 @@ const ErrorModal = ({ isOpen, message, onClose }) => {
               initial={{ scale: 0 }}
               animate={{ scale: 1.2, rotate: 360 }}
               transition={{ duration: 0.5 }}
-              className="w-16 h-16 rounded-full bg-gradient-to-r from-red-400 to-pink-500 flex items-center justify-center"
+              className="w-16 h-16 rounded-full bg-gradient-to-r from-red-400 to-pink-500 dark:from-red-500 dark:to-pink-600 flex items-center justify-center"
             >
               <motion.svg
                 initial={{ pathLength: 0 }}
@@ -46,7 +46,7 @@ const ErrorModal = ({ isOpen, message, onClose }) => {
           <p className="mb-4 text-lg font-semibold">{message}</p>
           <button
             onClick={onClose}
-            className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors"
+            className="bg-red-500 dark:bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-600 dark:hover:bg-red-700 transition-colors"
           >
             Close
           </button>
