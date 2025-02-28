@@ -88,7 +88,7 @@ const CredentialManager = () => {
 
   // API configuration
   const api = axios.create({
-    baseURL: process.env.REACT_APP_API_URL || "http://localhost:5000/api",
+    baseURL: "http://localhost:5100/api",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -397,13 +397,13 @@ const CredentialManager = () => {
     <>
       {isLocked ? (
         <div className="flex justify-center w-[90vw] mx-auto">
-          <div className="w-full  rounded-t-sm   h-[40vh]   flex items-center justify-center">
-            <div className="p-8 flex w-2/5 gap-6  items-center justify-between backdrop-blur-sm bg-white/[var(--widget-opacity)] dark:bg-[#513a7a]/[var(--widget-opacity)]  text-center rounded-md ">
+          <div className="w-full  rounded-t-sm mx-auto   flex items-center justify-center">
+            <div className="p-8 flex w-2/5 gap-6 mt-20  items-center justify-between backdrop-blur-sm bg-gray-100  dark:bg-gray-900   text-center rounded-md ">
               <div className=" text-indigo-500 mr-10 text-6xl">
                 <img src="/undraw_secure-login_m11a.svg" alt="locker" />
               </div>
               <div>
-                <h2 className="text-2xl my-1 mt-4 font-semibold dark:text-gray-200">
+                <h2 className="text-2xl text-gray-500 my-1 mt-4 font-semibold dark:text-gray-200">
                   Enter PIN to Unlock
                 </h2>
                 <div className="flex justify-center mt-4 space-x-2 mb-4">
@@ -416,7 +416,7 @@ const CredentialManager = () => {
                         handleInputOTPChange(e.target.value, index)
                       }
                       onKeyDown={(e) => handleKeyDown(e, index)}
-                      className="w-12 h-12 border border-gray-300 rounded-xs text-center text-lg dark:text-white dark:bg-[#513a7a]"
+                      className="w-12 h-12 border text-gray-500 border-gray-300 rounded-xs text-center text-lg dark:text-white bg-gray-200 dark:bg-gray-800"
                       style={{
                         appearance: "none", // Removes the arrows
                         MozAppearance: "textfield", // Firefox-specific
@@ -444,11 +444,11 @@ const CredentialManager = () => {
           </div>
         </div>
       ) : (
-        <div className="p-8 bg-white/[var(--widget-opacity)]  dark:bg-[#28283A]/[var(--widget-opacity)] mx-auto backdrop-blur-sm min-h-[60vh] max-w-[90vw] rounded-xl ">
+        <div className="p-8 bg-white dark:bg-gray-900 mx-auto backdrop-blur-sm  h-screen rounded-xl ">
           <div>
             <div className="flex justify-between w-[68%] xl:w-[79.2%]  items-center">
               <button
-                className="transition-all rounded-md bg-indigo-500 dark:bg-[#513a7a] text-white lg:text-lg text-sm lg:px-4 px-2 py-2 rounded-xs mb-4"
+                className="transition-all rounded-md bg-[#4150E7] dark:bg-gray-800 text-white lg:text-lg text-sm lg:px-4 px-2 py-2 rounded-xs mb-4"
                 onClick={() => showModal()}
               >
                 <FaPlus size={15} />
@@ -462,15 +462,15 @@ const CredentialManager = () => {
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full rounded-md px-4 py-2 dark:bg-[#28283a]   dark:text-white  rounded-xs focus:outline-none focus:ring-2 focus:ring-gray-800"
                 />
-                <div className="flex items-center rounded-md gap-2 bg-gray-200 dark:bg-[#28283a]   p-1 ">
+                <div className="flex items-center rounded-md gap-2 bg-gray-200 dark:bg-gray-800   p-1 ">
                   <button
                     onClick={() => setIsGridView(true)}
                     className={`p-2 rounded ${
-                      isGridView ? "bg-white dark:bg-[#513a7a] shadow-sm" : ""
+                      isGridView ? "bg-white dark:bg-gray-800 shadow-sm" : ""
                     }`}
                   >
                     <svg
-                      className="w-5 h-5 dark:text-white"
+                      className="w-5 h-5 dark:text-white text-gray-500"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -486,11 +486,11 @@ const CredentialManager = () => {
                   <button
                     onClick={() => setIsGridView(false)}
                     className={`p-2 rounded ${
-                      !isGridView ? "bg-white dark:bg-gray-600 shadow-sm" : ""
+                      !isGridView ? "bg-white dark:bg-gray-800 shadow-sm" : ""
                     }`}
                   >
                     <svg
-                      className="w-5 h-5 dark:text-white"
+                      className="w-5 h-5 text-gray-500 dark:text-white"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -508,7 +508,7 @@ const CredentialManager = () => {
               <div className="lg:space-x-2 w-fit flex justify-between  space-x-1">
                 {filteredCredentials.length > 0 && (
                   <button
-                    className="transition-all w-fit text-center rounded-md dark:bg-[#513a7a] dark:hover:bg-gray-600 dark:text-gray-200  bg-gray-300 hover:bg-gray-600 hover:text-gray-100 text-gray-800 border border-black/5 px-4 py-2 rounded-xs mb-4"
+                      className="transition-all w-fit text-center rounded-md dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200  bg-gray-300 hover:bg-gray-600 hover:text-gray-100 text-gray-800 border border-black/5 px-4 py-2 rounded-xs mb-4"
                     onClick={toggleAllPasswordVisibility}
                   >
                     {filteredCredentials.length > 0 &&
@@ -541,11 +541,11 @@ const CredentialManager = () => {
                       return (
                         <div
                           key={cred._id || index}
-                          className="bg-white dark:bg-[#28283A]   dark:text-gray-400 p-6 rounded-lg   relative"
+                          className="bg-white dark:bg-gray-800 text-gray-700  dark:text-gray-400 p-6 rounded-lg   relative"
                         >
                           {/* Title and Logo */}
                           <div className="flex items-center justify-between mb-4">
-                            <h2 className="font-semibold text-xl dark:text-gray-200">
+                            <h2 className="font-semibold text-xl text-gray-700 dark:text-gray-200">
                               {cred.website}
                             </h2>
                             <img
@@ -557,7 +557,7 @@ const CredentialManager = () => {
 
                           {/* URL */}
                           <div className="flex items-center gap-2 mb-4">
-                            <span className="text-sm text-gray-500 dark:text-gray-400">
+                            <span className="text-sm text-gray-700 dark:text-gray-400">
                               URL:
                             </span>
                             <a
@@ -573,11 +573,11 @@ const CredentialManager = () => {
                           {/* Credentials */}
                           <div className="space-y-3">
                             <div className="flex items-center justify-between">
-                              <span className="text-sm text-gray-500 dark:text-gray-400">
+                              <span className="text-sm text-gray-700 dark:text-gray-400">
                                 Username:
                               </span>
                               <div className="flex items-center gap-2">
-                                <span className="text-sm font-medium dark:text-gray-300">
+                                <span className="text-sm font-medium text-gray-500 dark:text-gray-300">
                                   {cred.username}
                                 </span>
                                 <button
@@ -590,11 +590,11 @@ const CredentialManager = () => {
                             </div>
 
                             <div className="flex items-center justify-between">
-                              <span className="text-sm text-gray-500 dark:text-gray-400">
+                              <span className="text-sm text-gray-700 dark:text-gray-400">
                                 Password:
                               </span>
                               <div className="flex items-center gap-2">
-                                <span className="text-sm font-medium dark:text-gray-300">
+                                <span className="text-sm font-medium text-gray-500  dark:text-gray-300">
                                   {showPasswords[cred.website]
                                     ? cred.password
                                     : "••••••••"}
@@ -624,10 +624,10 @@ const CredentialManager = () => {
                           {/* Footer */}
                           <div className="flex items-center justify-between mt-4 pt-4 border-t dark:border-gray-800/20">
                             <div>
-                              <div className="text-xs text-gray-500">
+                                <div className="text-xs dark:text-gray-400 text-gray-700">
                                 Password Strength
                               </div>
-                              <div className="text-sm font-medium dark:text-gray-300">
+                              <div className="text-sm font-medium text-gray-400 dark:text-gray-300">
                                 {message}
                               </div>
                             </div>
