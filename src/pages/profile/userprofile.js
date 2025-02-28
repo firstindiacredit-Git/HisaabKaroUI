@@ -116,7 +116,7 @@ const GetUserProfile = () => {
                         <ProfileCard 
                           userProfile={userProfile} 
                         />
-                        <ProfileStats expenses={t('dashboard.totalExpenses')} income={t('dashboard.totalIncome')} />
+                        {/* <ProfileStats expenses={t('dashboard.totalExpenses')} income={t('dashboard.totalIncome')} /> */}
                       </div>
 
                       <div className="md:w-2/3 p-8 relative">

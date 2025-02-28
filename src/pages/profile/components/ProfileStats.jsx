@@ -6,14 +6,14 @@ const ProfileStats = ({ expenses, income }) => {
 
   return (
     <div className="mt-6 grid grid-cols-2 gap-4 text-center text-white/90">
-      <div className="bg-white/10 rounded-lg p-3">
+      {/* <div className="bg-white/10 rounded-lg p-3">
         <p className="text-sm opacity-80">{t('dashboard.totalExpenses')}</p>
         <p className="text-lg font-semibold">{expenses}</p>
       </div>
       <div className="bg-white/10 rounded-lg p-3">
         <p className="text-sm opacity-80">{t('dashboard.totalIncome')}</p>
         <p className="text-lg font-semibold">{income}</p>
-      </div>
+      </div> */}
     </div>
   );
 };

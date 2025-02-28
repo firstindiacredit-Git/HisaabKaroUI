@@ -5,8 +5,7 @@ import {
   AiOutlineCheckCircle,
   AiOutlineClockCircle,
   AiOutlineInfoCircle,
-  AiOutlineSend,
-  AiOutlineMessage,
+   AiOutlineMessage,
   AiOutlineEye,
 } from "react-icons/ai";
 import { BsFilePdf } from "react-icons/bs";
@@ -36,7 +35,7 @@ export const TableView = ({
 
   const fetchResponses = async (transactionId) => {
     try {
-      const response = await fetch(`http://localhost:5100/api/response/get-response/${transactionId}`, {
+      const response = await fetch(`${process.env.REACT_APP_URL}/api/response/get-response/${transactionId}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -67,7 +66,7 @@ export const TableView = ({
 
     setSubmittingResponse(responseModal.entryId);
     try {
-      const response = await fetch('http://localhost:5100/api/response/add-response', {
+      const response = await fetch(`${process.env.REACT_APP_URL}/api/response/add-response`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
