@@ -70,7 +70,9 @@
     "invoice": "Invoice",
     "calculator": "Calculator",
     "tools": "Tools",
-    "password": "Password"
+    "password": "Password",
+    "calculator":"Calculator",
+    "notes": "Notes"
   },
   "dashboard": {
     "welcome": "Welcome",

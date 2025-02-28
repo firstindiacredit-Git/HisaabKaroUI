@@ -69,7 +69,8 @@
     "invoice": "चालान",
     "calculator": "कैलकुलेटर",
     "tools": "उपकरण",
-    "password": "पासवर्ड"
+    "password": "पासवर्ड",
+    "notes":"नोट्स"
   },
   "dashboard": {
     "welcome": "स्वागत है",

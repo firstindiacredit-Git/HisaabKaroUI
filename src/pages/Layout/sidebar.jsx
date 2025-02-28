@@ -7,6 +7,8 @@ import {
   FaFileInvoiceDollar,
   FaTools,
   FaLock,
+  FaCalculator,
+  FaStickyNote,
 } from "react-icons/fa";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
@@ -180,7 +182,9 @@ const Sidebar = () => {
     // { path: "/loans", icon: FaHandHoldingUsd, label: t('navigation.loans') },
     { path: "/invoice", icon: FaReceipt, label: t("navigation.invoice") },
     { path: "/tools", icon: FaTools, label: t("navigation.tools") },
+    { path: "/calculator/calculator", icon: FaCalculator, label: t("navigation.calculator") },
     { path: "/password", icon: FaLock, label: t("navigation.password") },
+    { path: "/notes", icon: FaStickyNote, label: t("navigation.notes") },
   ];
 
   return (

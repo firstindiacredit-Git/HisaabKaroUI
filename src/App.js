@@ -122,6 +122,9 @@ import SentInvoices from "./pages/invoice/SentInvoices.jsx";
 import ReceivedInvoices from "./pages/invoice/ReceivedInvoices.jsx";
 import ViewInvoice from "./pages/invoice/ViewInvoice.jsx";
 import Password from "./pages/password/password.jsx";
+import Notes from "./pages/notes/Notes.jsx";
+import MainCalculator from "./pages/calculator/calculator.jsx";
+
 const GlobalStyle = createGlobalStyle`
   * {
     scrollbar-width: none !important;
@@ -401,12 +404,14 @@ function App() {
                       element={<CollaborativeBookRecords />}
                     />
                     <Route path="/password" element={<Password />} />
+                    <Route path="/calculator/calculator" element={<MainCalculator />} />
+                    <Route path="/notes" element={<Notes />} />
                     <Route path="/saved-invoices" element={<SavedInvoices />} />
                     <Route path="/sent-invoices" element={<SentInvoices />} />
                     <Route path="/received-invoices" element={<ReceivedInvoices />} />
                     <Route path="/invoice/view/:invoiceId" element={<ViewInvoice />} />
                   </Route>
-                  <Route path="/calculator" element={<Calculators />} />
+                  <Route path="/calculator" element={<Calculator />} />
                   <Route
                     path="/faren-to-celcius"
                     element={<FarenToCelciusAndCelciusToFaren />}
