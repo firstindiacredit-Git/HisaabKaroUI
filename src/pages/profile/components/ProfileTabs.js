@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 
 const ProfileTabs = ({ activeTab, setActiveTab }) => {
+  const { t, i18n } = useTranslation();
+
+  // Debugging: Log the detected language
+
   const tabs = [
     {
       id: "profile",
-      label: "Profile",
+      label: t("profile.tabs.profile"),
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +30,7 @@ const ProfileTabs = ({ activeTab, setActiveTab }) => {
     },
     {
       id: "security",
-      label: "Security",
+      label: t("profile.tabs.security"),
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +50,7 @@ const ProfileTabs = ({ activeTab, setActiveTab }) => {
     },
     {
       id: "preferences",
-      label: "Preferences",
+      label: t("profile.tabs.preferences"),
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +90,9 @@ const ProfileTabs = ({ activeTab, setActiveTab }) => {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          <span className={activeTab === tab.id ? "text-blue-600" : "text-gray-500"}>
+          <span
+            className={activeTab === tab.id ? "text-blue-600" : "text-gray-500"}
+          >
             {tab.icon}
           </span>
           <span>{tab.label}</span>

@@ -1,6 +1,7 @@
-import React from 'react';
+import React from "react";
 import { BsFilter, BsGrid, BsListUl, BsWhatsapp } from "react-icons/bs";
 import { AiOutlineFilter } from "react-icons/ai";
+import { useTranslation } from "react-i18next";
 
 export const FilterControls = ({
   viewMode,
@@ -27,6 +28,8 @@ export const FilterControls = ({
   onWhatsAppReminder,
   userId,
 }) => {
+  const { t } = useTranslation();
+
   const handleSortOptionClick = (option) => {
     handleSortChange(option);
     setShowSortMenu(false);
@@ -51,7 +54,7 @@ export const FilterControls = ({
   const getInitiatorNames = () => {
     if (!transaction?.transactionHistory) return [];
     const uniqueInitiators = new Set();
-    transaction.transactionHistory.forEach(entry => {
+    transaction.transactionHistory.forEach((entry) => {
       if (entry.initiatedBy) {
         uniqueInitiators.add(entry.initiatedBy);
       }
@@ -63,7 +66,8 @@ export const FilterControls = ({
 
   // Move this outside the handler function
   const pendingTransactions = transaction?.transactionHistory?.filter(
-    entry => entry.confirmationStatus === "pending" && entry.initiaterId === userId
+    (entry) =>
+      entry.confirmationStatus === "pending" && entry.initiaterId === userId
   );
 
   const handleSendReminders = async () => {
@@ -71,6 +75,18 @@ export const FilterControls = ({
     for (const entry of pendingTransactions) {
       await onWhatsAppReminder(entry);
     }
+  };
+
+  // Translate status filter display
+  const getStatusDisplayText = (status) => {
+    if (status === "all") return t("common.status");
+    return t(`filters.${status}`);
+  };
+
+  // Translate added by filter display
+  const getAddedByDisplayText = (filter) => {
+    if (filter === "all") return t("common.addedBy");
+    return filter;
   };
 
   return (
@@ -86,7 +102,7 @@ export const FilterControls = ({
               className="flex items-center space-x-1 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-700 dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 whitespace-nowrap"
             >
               <BsFilter className="w-4 h-4 sm:w-5 sm:h-5" />
-              <span>Sort</span>
+              <span>{t("common.sort")}</span>
             </button>
             {showSortMenu && (
               <div className="absolute left-0 z-10 mt-2 w-48 bg-white dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 rounded-lg shadow-lg border border-gray-200">
@@ -95,25 +111,25 @@ export const FilterControls = ({
                     onClick={() => handleSortOptionClick("newest")}
                     className="block w-full px-4 py-2 text-sm text-left bg-white text-gray-700 dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 hover:bg-gray-100"
                   >
-                    Newest First
+                    {t("filters.newestFirst")}
                   </button>
                   <button
                     onClick={() => handleSortOptionClick("oldest")}
                     className="block w-full px-4 py-2 text-sm text-left bg-white text-gray-700 dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 hover:bg-gray-100"
                   >
-                    Oldest First
+                    {t("filters.oldestFirst")}
                   </button>
                   <button
                     onClick={() => handleSortOptionClick("amount_high")}
                     className="block w-full px-4 py-2 text-sm text-left bg-white text-gray-700 dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 hover:bg-gray-100"
                   >
-                    Amount (High to Low)
+                    {t("filters.amountHighToLow")}
                   </button>
                   <button
                     onClick={() => handleSortOptionClick("amount_low")}
                     className="block w-full px-4 py-2 text-sm text-left bg-white text-gray-700 dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700   hover:bg-gray-100"
                   >
-                    Amount (Low to High)
+                    {t("filters.amountLowToHigh")}
                   </button>
                 </div>
               </div>
@@ -131,7 +147,7 @@ export const FilterControls = ({
               } rounded-lg hover:bg-gray-50 whitespace-nowrap`}
             >
               <AiOutlineFilter className="w-4 h-4 sm:w-5 sm:h-5" />
-              <span>{statusFilter === "all" ? "Status" : statusFilter}</span>
+              <span>{getStatusDisplayText(statusFilter)}</span>
             </button>
             {showStatusFilterMenu && (
               <div className="absolute left-0 z-10 mt-2 w-48 bg-white dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 rounded-lg shadow-lg border border-gray-200">
@@ -140,19 +156,19 @@ export const FilterControls = ({
                     onClick={() => handleStatusOptionClick("all")}
                     className="block w-full px-4 py-2 text-sm text-left bg-white text-gray-700 dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 hover:bg-gray-100"
                   >
-                    All
+                    {t("filters.all")}
                   </button>
                   <button
                     onClick={() => handleStatusOptionClick("confirmed")}
                     className="block w-full px-4 py-2 text-sm text-left bg-white text-gray-700 dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 hover:bg-gray-100"
                   >
-                    Confirmed
+                    {t("filters.confirmed")}
                   </button>
                   <button
                     onClick={() => handleStatusOptionClick("pending")}
                     className="block w-full px-4 py-2 text-sm text-left bg-white text-gray-700 dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 hover:bg-gray-100"
                   >
-                    Pending
+                    {t("filters.pending")}
                   </button>
                 </div>
               </div>
@@ -166,13 +182,11 @@ export const FilterControls = ({
               className={`flex items-center space-x-1 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm ${
                 addedByFilter !== "all"
                   ? "text-blue-600 bg-blue-50 border border-blue-200"
-                    : "text-gray-700 bg-white border dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400 border-gray-300"
+                  : "text-gray-700 bg-white border dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400 border-gray-300"
               } rounded-lg hover:bg-gray-50 whitespace-nowrap`}
             >
               <AiOutlineFilter className="w-4 h-4 sm:w-5 sm:h-5" />
-              <span>
-                {addedByFilter === "all" ? "Added by" : addedByFilter}
-              </span>
+              <span>{getAddedByDisplayText(addedByFilter)}</span>
             </button>
             {showAddedByFilterMenu && (
               <div className="absolute left-0 z-10 mt-2 w-48 bg-white dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 rounded-lg shadow-lg border border-gray-200">
@@ -181,7 +195,7 @@ export const FilterControls = ({
                     onClick={() => handleAddedByOptionClick("all")}
                     className="block w-full px-4 py-2 text-sm text-left bg-white text-gray-700 dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 hover:bg-gray-100"
                   >
-                    All
+                    {t("filters.all")}
                   </button>
                   {initiatorNames.map((name) => (
                     <button
@@ -203,7 +217,7 @@ export const FilterControls = ({
               onClick={clearAllFilters}
               className="px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg hover:bg-red-100 whitespace-nowrap shrink-0"
             >
-              Clear
+              {t("common.clear")}
             </button>
           )}
         </div>
@@ -219,7 +233,7 @@ export const FilterControls = ({
                   ? "bg-blue-100  text-blue-600"
                   : "text-gray-500 dark:text-gray-400 hover:bg-gray-100"
               }`}
-              title="List View"
+              title={t("viewMode.listView")}
             >
               <BsListUl className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
@@ -230,7 +244,7 @@ export const FilterControls = ({
                   ? "bg-blue-100  text-blue-600"
                   : "text-gray-500 dark:text-gray-400 hover:bg-gray-100"
               }`}
-              title="Grid View"
+              title={t("viewMode.gridView")}
             >
               <BsGrid className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
@@ -242,7 +256,9 @@ export const FilterControls = ({
               onClick={() => setShowItemsPerPage(!showItemsPerPage)}
               className="flex items-center dark:text-gray-400 dark:bg-gray-700 dark:border-gray-700 justify-center space-x-1 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
             >
-              <span>Show: {itemsPerPage}</span>
+              <span>
+                {t("common.show")}: {itemsPerPage}
+              </span>
             </button>
             {showItemsPerPage && (
               <div className="absolute right-0 z-10 mt-2 w-48 bg-white dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 rounded-lg shadow-lg border border-gray-200">
@@ -253,7 +269,7 @@ export const FilterControls = ({
                       onClick={() => handleItemsPerPageOptionClick(number)}
                       className="block w-full px-4 py-2 text-sm text-left bg-white text-gray-700 dark:text-gray-400 dark:bg-gray-700  dark:border-gray-700 hover:bg-gray-100"
                     >
-                      {number} items
+                      {number} {t("common.items")}
                     </button>
                   ))}
                 </div>
@@ -266,10 +282,12 @@ export const FilterControls = ({
             <button
               onClick={handleSendReminders}
               className="inline-flex items-center px-3 py-2 text-sm font-medium text-green-600 bg-green-50 rounded-md hover:bg-green-100"
-              title="Send WhatsApp Reminders"
+              title={t("whatsapp.sendReminders")}
             >
               <BsWhatsapp className="w-4 h-4 mr-1.5" />
-              <span className="hidden sm:inline">Send Reminders</span>
+              <span className="hidden sm:inline">
+                {t("whatsapp.sendReminders")}
+              </span>
             </button>
           )}
         </div>

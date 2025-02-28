@@ -36,7 +36,16 @@
     "transactions": "transactions",
     "previous": "Previous",
     "next": "Next",
-    "noNotifications":"No Notifications"
+    "noNotifications": "No Notifications",
+    "success": "Success",
+    "optional": "optional",
+    "filter": "Filter",
+    "sort": "Sort",
+    "status": "Status",
+    "addedBy": "Added by",
+    "clear": "Clear",
+    "show": "Show",
+    "items": "items"
   },
   "auth": {
     "login": "Login",
@@ -48,7 +57,8 @@
     "alreadyHaveAccount": "Already have an account?",
     "dontHaveAccount": "Don't have an account?",
     "signupNow": "Sign up now",
-    "loginNow": "Login now"
+    "loginNow": "Login now",
+    "pleaseLogin": "Please log in to access your profile"
   },
   "navigation": {
     "home": "Home",
@@ -58,7 +68,9 @@
     "books": "Books",
     "loans": "Loans",
     "invoice": "Invoice",
-    "calculator": "Calculator"
+    "calculator": "Calculator",
+    "tools": "Tools",
+    "password": "Password"
   },
   "dashboard": {
     "welcome": "Welcome",
@@ -95,8 +107,8 @@
     "history": "Transaction History",
     "youInitiated": "You initiated",
     "initiatedByOthers": "Initiated by others",
-    "youWillGet": "Received",
-    "youWillGive": "Sent",
+    "youWillGet": "Receive",
+    "youWillGive": "send",
     "outstandingBalance": "Outstanding Balance",
     "settled": "Settled",
     "clientTransaction": "Client Transaction",
@@ -106,7 +118,24 @@
     "totalOutstanding": "Tally",
     "unconfirmed": "unconfirmed",
     "afterSettlement": "After settlement",
-    "summary": "Summary"
+    "summary": "Summary",
+    "enterDetails": "Enter additional details about the transaction...",
+    "uploadFile": "Upload File",
+    "clickToUpload": "Click to upload a file",
+    "fileTypes": "PNG, JPG, PDF up to 5MB",
+    "selected": "Selected",
+    "createTransaction": "Create Transaction",
+    "addedSuccessfully": "Transaction added successfully!",
+    "failedToCreate": "Failed to create transaction. Please try again.",
+    "enterAmount": "Enter amount",
+    "enterDescription": "Enter description",
+    "attachment": "Attachment",
+    "adding": "Adding...",
+    "get": "Get",
+    "give": "Give",
+    "exportPDF": "Export PDF",
+    "you will get": "Receive",
+    "you will give": "Send"
   },
   "calculator": {
     "basic": "Basic Calculator",
@@ -121,6 +150,15 @@
   "profile": {
     "title": "Your Profile",
     "subtitle": "Manage your account information and settings",
+    "updateProfile": "Update Profile",
+    "loading": {
+      "title": "Loading your profile",
+      "subtitle": "Please wait a moment..."
+    },
+    "error": {
+      "title": "Unable to Load Profile",
+      "message": "Please try refreshing the page or contact support if the issue persists."
+    },
     "tabs": {
       "profile": "Profile",
       "security": "Security",
@@ -137,8 +175,13 @@
     },
     "security": {
       "title": "Security Settings",
-      "changePassword": "Change Password",
-      "twoFactor": "Two-Factor Authentication"
+      "changePassword": "Password Settings",
+      "changePasswordDesc": "Change your password or set up password recovery",
+      "twoFactor": "Two-Factor Authentication",
+      "twoFactorDesc": "Add an extra layer of security to your account"
+    },
+    "preferences": {
+      "title": "User Preferences"
     }
   },
   "errors": {
@@ -147,5 +190,195 @@
     "noInternet": "No Internet Connection",
     "tryAgain": "Try Again",
     "somethingWentWrong": "Something went wrong"
+  },
+  "invoice": {
+    "chooseTemplate": "Choose Invoice Template To Create An Invoice",
+    "received": "Received",
+    "saved": "Saved",
+    "sent": "Sent",
+    "useTemplate": "Use Template",
+    "templates": {
+      "classic": {
+        "name": "Classic Invoice",
+        "description": "A professional and clean invoice layout"
+      },
+      "modern": {
+        "name": "Modern Invoice",
+        "description": "Contemporary design with bold typography"
+      },
+      "minimal": {
+        "name": "Minimal Invoice",
+        "description": "Simple and straightforward layout"
+      },
+      "business": {
+        "name": "Business Invoice",
+        "description": "Corporate style with detailed breakdown"
+      }
+    }
+  },
+  "tools": {
+    "title": "Tools & Utilities",
+    "progress": {
+      "title": "Tool Progress",
+      "explored": "tools explored",
+      "of": "of",
+      "getStarted": "Get Started!",
+      "toolsUsed": "Tools Used",
+      "levels": {
+        "beginner": "Just getting started",
+        "intermediate": "Halfway there",
+        "expert": "Tool master"
+      },
+      "notification": {
+        "title": "Ready to explore?",
+        "message": "Try out any tool to start tracking your progress"
+      }
+    },
+    "categories": {
+      "pdf": "PDF Tools",
+      "tasks": "Task Management",
+      "calculators": "Calculators",
+      "converters": "Converters",
+      "misc": "Miscellaneous"
+    },
+    "viewTypes": {
+      "grid": "Grid View",
+      "list": "List View"
+    },
+    "pdfTools": {
+      "searchExcel": "Search Excel",
+      "imageToPdf": "Image To PDF",
+      "splitPdf": "Split PDF",
+      "compressPdf": "Compress PDF",
+      "mergePdf": "Merge PDF",
+      "wordToPdf": "Word To PDF",
+      "editPdf": "Edit PDF",
+      "extractPages": "Extract Pages",
+      "pdfCropper": "PDF Cropper",
+      "addPageNumber": "Add Page Number",
+      "protectPdf": "Protect PDF",
+      "unlockPdf": "Unlock PDF",
+      "pdfToImage": "PDF To Image",
+      "pdfToWord": "PDF To Word",
+      "extractPage": "Extract Page",
+      "addPageNum": "Add Page Number"
+    },
+    "taskTools": {
+      "groceryList": "Grocery List",
+      "emailChecker": "Email Checker",
+      "emailSender": "Email Sender",
+      "mapExtractor": "Google Map Extractor",
+      "cardValidator": "Card Validator",
+      "cardGenerator": "Card Generator",
+      "templateGenerator": "HTML Template Generator",
+      "phoneFormatter": "Phone Number Formatter",
+      "passwordGenerator": "Random Password Generator",
+      "linkedinScraper": "LinkedIn Scraper",
+      "htmlTemplateGenerator": "HTML Template Generator",
+      "googleMapExtractor": "Google Map Extractor",
+      "phoneNumberFormatter": "Phone Number Formatter",
+      "randomPasswordGenerator": "Random Password Generator"
+    },
+    "calculatorTools": {
+      "calculator": "Calculator",
+      "percentageCalc": "% Calculator",
+      "bmiCalc": "BMI Calculator",
+      "scientificCalc": "Scientific Calculator",
+      "compareLoan": "Compare Loan",
+      "currencyConverter": "Currency Converter",
+      "fractionCalc": "Fraction Calculator",
+      "averageCalc": "Average Calculator",
+      "lcmCalc": "LCM Calculator",
+      "ageCalc": "Age Calculator",
+      "dateDiffCalc": "Date Difference Calculator",
+      "compoundInterestCalc": "Compound Interest Calculator",
+      "simpleInterestCalc": "Simple Interest Calculator",
+      "discountCalc": "Discount Calculator",
+      "gstCalc": "GST Calculator",
+      "vatCalc": "VAT Calculator",
+      "electricityBillCalc": "Electricity Bill Calculator",
+      "testScoreCalc": "Test Score Calculator",
+      "percentageCalculator": "% Calculator",
+      "bmiCalculator": "BMI Calculator",
+      "scientificCalculator": "Scientific Calculator",
+      "fractionCalculator": "Fraction Calculator",
+      "averageCalculator": "Average Calculator",
+      "lcmCalculator": "LCM Calculator",
+      "ageCalculator": "Age Calculator",
+      "dateDifferenceCalculator": "Date Difference Calculator",
+      "compoundInterestCalculator": "Compound Interest Calculator",
+      "simpleInterestCalculator": "Simple Interest Calculator",
+      "discountCalculator": "Discount Calculator",
+      "gstCalculator": "GST Calculator",
+      "vatCalculator": "VAT Calculator",
+      "electricityBillCalculator": "Electricity Bill Calculator",
+      "testScoreCalculator": "Test Score Calculator"
+    },
+    "converterTools": {
+      "fahrenheitToCelsius": "Fahrenheit to Celsius",
+      "secondToHour": "Second to Hour",
+      "hourToSecond": "Hour to Second",
+      "textToSpeech": "Text To Speech",
+      "speechToText": "Speech To Text",
+      "onlineVoiceRecorder": "Online Voice Recorder",
+      "onlineScreenRecorder": "Online Screen Recorder",
+      "onlineScreenshot": "Online Screenshot",
+      "onlineWebcamTest": "Online Webcam Test",
+      "calendar": "Calendar",
+      "clock": "Clock",
+      "stopWatch": "Stopwatch",
+      "countdownTimer": "Countdown Timer",
+      "alarmClock": "Alarm Clock",
+      "binaryToDecimal": "Binary To Decimal"
+    },
+    "miscTools": {
+      "paypalLink": "Paypal Link Generator",
+      "htmlBeautifier": "HTML Beautifier",
+      "resumeBuilder": "Resume Builder",
+      "linkChecker": "Website Link Checker",
+      "wordCounter": "Word Counter",
+      "trafficChecker": "Traffic Checker"
+    }
+  },
+  "filters": {
+    "newestFirst": "Newest First",
+    "oldestFirst": "Oldest First",
+    "amountHighToLow": "Amount (High to Low)",
+    "amountLowToHigh": "Amount (Low to High)",
+    "all": "All",
+    "confirmed": "Confirmed",
+    "pending": "Pending"
+  },
+  "viewMode": {
+    "listView": "List View",
+    "gridView": "Grid View"
+  },
+  "whatsapp": {
+    "sendReminders": "Send Reminders"
+  },
+  "tableView": {
+    "responses": "Responses",
+    "viewResponse": "View Response",
+    "submitResponse": "Submit Response",
+    "enterResponse": "Enter your response",
+    "submitting": "Submitting...",
+    "closeResponse": "Close Response",
+    "viewDetails": "View Details",
+    "noResponsesYet": "No responses yet",
+    "errorFetchingResponses": "Error fetching responses",
+    "date": "Date",
+    "type": "Type",
+    "amount": "Amount",
+    "description": "Description",
+    "status": "Status",
+    "actions": "Actions",
+    "edit": "Edit",
+    "delete": "Delete",
+    "split": "Split",
+    "file": "File",
+    "confirm": "Confirm",
+    "pending": "Pending",
+    "confirmed": "Confirmed",
+    "sendReminder": "Send Reminder"
   }
 }

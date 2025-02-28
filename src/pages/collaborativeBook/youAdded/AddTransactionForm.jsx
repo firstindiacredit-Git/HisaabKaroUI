@@ -1,5 +1,6 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const AddTransactionForm = ({
   showForm,
@@ -11,6 +12,8 @@ const AddTransactionForm = ({
   adding,
   setSelectedTransactionType,
 }) => {
+  const { t } = useTranslation();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     await handleAddTransaction();
@@ -50,8 +53,8 @@ const AddTransactionForm = ({
               <div className="flex justify-between items-center">
                 <h3 className="text-2xl font-bold text-white">
                   {selectedTransactionType === "you will get"
-                    ? "You Will Get"
-                    : "You Will Give"}
+                    ? t("transactions.youWillGet")
+                    : t("transactions.youWillGive")}
                 </h3>
                 <button
                   onClick={() => setShowForm(false)}
@@ -79,14 +82,14 @@ const AddTransactionForm = ({
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Amount
+                    {t("transactions.amount")}
                   </label>
                   <div className="relative">
                     <input
                       type="number"
                       step="0.01"
                       min="0"
-                      placeholder="Enter amount"
+                      placeholder={t("transactions.enterAmount")}
                       value={newTransaction.amount}
                       onChange={(e) =>
                         setNewTransaction({
@@ -103,11 +106,11 @@ const AddTransactionForm = ({
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Description
+                    {t("transactions.description")}
                   </label>
                   <input
                     type="text"
-                    placeholder="Enter description"
+                    placeholder={t("transactions.enterDescription")}
                     value={newTransaction.description}
                     onChange={(e) =>
                       setNewTransaction({
@@ -122,7 +125,7 @@ const AddTransactionForm = ({
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Attachment
+                    {t("transactions.attachment")}
                   </label>
                   <div className="relative">
                     <input
@@ -177,10 +180,10 @@ const AddTransactionForm = ({
                             d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                           ></path>
                         </svg>
-                        Adding...
+                        {t("transactions.adding")}
                       </div>
                     ) : (
-                      "Submit"
+                      t("common.submit")
                     )}
                   </button>
                   <button
@@ -189,7 +192,7 @@ const AddTransactionForm = ({
                     className="flex-1 px-6 py-3 bg-gray-100 text-gray-700 rounded-xl font-semibold
                     hover:bg-gray-200 transform hover:scale-105 transition-all duration-200"
                   >
-                    Cancel
+                    {t("common.cancel")}
                   </button>
                 </div>
               </form>

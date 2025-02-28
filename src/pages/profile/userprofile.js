@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useProfile } from "../../context/ProfileContext";
 import { LanguageProvider } from "../../context/LanguageContext";
 import LanguageSettings from "./components/LanguageSettings";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 // Import components
 import ProfileHeader from "./components/ProfileHeader";
@@ -23,7 +23,7 @@ const GetUserProfile = () => {
   const { t } = useTranslation();
 
   if (!localStorage.getItem("token")) {
-    toast.warn("Please log in to access your profile");
+    toast.warn(t("auth.pleaseLogin"));
     navigate("/login");
     return null;
   }
@@ -45,9 +45,11 @@ const GetUserProfile = () => {
             </div>
             <div className="flex flex-col items-center">
               <p className="text-lg font-medium bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Loading your profile
+                {t("profile.loading.title")}
               </p>
-              <p className="text-sm text-gray-500">Please wait a moment...</p>
+              <p className="text-sm text-gray-500">
+                {t("profile.loading.subtitle")}
+              </p>
             </div>
           </div>
         </div>
@@ -86,8 +88,8 @@ const GetUserProfile = () => {
         transition={{ duration: 0.5 }}
       >
         <ProfileHeader
-          title={t('profile.title')}
-          subtitle={t('profile.subtitle')}
+          title={t("profile.title")}
+          subtitle={t("profile.subtitle")}
         />
 
         {userProfile ? (
@@ -113,9 +115,7 @@ const GetUserProfile = () => {
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500"></div>
                     <div className="md:flex">
                       <div className="md:w-1/3 bg-gradient-to-br from-blue-600 to-purple-600 p-8 flex flex-col items-center justify-center relative overflow-hidden">
-                        <ProfileCard 
-                          userProfile={userProfile} 
-                        />
+                        <ProfileCard userProfile={userProfile} />
                         {/* <ProfileStats expenses={t('dashboard.totalExpenses')} income={t('dashboard.totalIncome')} /> */}
                       </div>
 
@@ -130,7 +130,9 @@ const GetUserProfile = () => {
                             onClick={() => setShowModal(true)}
                             className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transform relative group overflow-hidden"
                           >
-                            <span className="relative z-10">Update Profile</span>
+                            <span className="relative z-10">
+                              {t("profile.updateProfile")}
+                            </span>
                             <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                           </button>
                         </div>
@@ -142,19 +144,23 @@ const GetUserProfile = () => {
                 {activeTab === "security" && (
                   <div className="p-8">
                     <h3 className="text-xl font-semibold mb-4">
-                      Security Settings
+                      {t("profile.security.title")}
                     </h3>
                     <div className="space-y-4">
                       <div className="p-4 bg-gray-50 rounded-lg">
-                        <h4 className="font-medium">Two-Factor Authentication</h4>
+                        <h4 className="font-medium">
+                          {t("profile.security.twoFactor")}
+                        </h4>
                         <p className="text-sm text-gray-500 mt-1">
-                          Add an extra layer of security to your account
+                          {t("profile.security.twoFactorDesc")}
                         </p>
                       </div>
                       <div className="p-4 bg-gray-50 rounded-lg">
-                        <h4 className="font-medium">Password Settings</h4>
+                        <h4 className="font-medium">
+                          {t("profile.security.changePassword")}
+                        </h4>
                         <p className="text-sm text-gray-500 mt-1">
-                          Change your password or set up password recovery
+                          {t("profile.security.changePasswordDesc")}
                         </p>
                       </div>
                     </div>
@@ -164,13 +170,15 @@ const GetUserProfile = () => {
                 {activeTab === "preferences" && (
                   <div className="p-8">
                     <h3 className="text-xl font-semibold mb-4">
-                      User Preferences
+                      {t("profile.preferences.title")}
                     </h3>
                     <div className="space-y-4">
                       <div className="p-4 bg-gray-50 rounded-lg">
-                        <h4 className="font-medium">Notification Settings</h4>
+                        <h4 className="font-medium">
+                          {t("profile.notifications.title")}
+                        </h4>
                         <p className="text-sm text-gray-500 mt-1">
-                          Manage your email and push notifications
+                          {t("profile.notifications.subtitle")}
                         </p>
                       </div>
                       <LanguageSettings />
@@ -199,11 +207,10 @@ const GetUserProfile = () => {
               </div>
               <div className="ml-4">
                 <h3 className="text-lg font-semibold text-red-800">
-                  Unable to Load Profile
+                  {t("profile.error.title")}
                 </h3>
                 <p className="text-red-700 mt-1">
-                  Please try refreshing the page or contact support if the issue
-                  persists.
+                  {t("profile.error.message")}
                 </p>
               </div>
             </div>

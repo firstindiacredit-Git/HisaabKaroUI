@@ -35,7 +35,16 @@
     "of": "में से",
     "transactions": "लेनदेन",
     "previous": "पिछला",
-    "next": "अगला"
+    "next": "अगला",
+    "success": "सफलता",
+    "optional": "वैकल्पिक",
+    "filter": "फ़िल्टर",
+    "sort": "क्रमबद्ध करें",
+    "status": "स्थिति",
+    "addedBy": "किसके द्वारा जोड़ा गया",
+    "clear": "साफ करें",
+    "show": "दिखाएँ",
+    "items": "आइटम"
   },
   "auth": {
     "login": "लॉग इन",
@@ -47,7 +56,8 @@
     "alreadyHaveAccount": "पहले से खाता है?",
     "dontHaveAccount": "खाता नहीं है?",
     "signupNow": "अभी साइन अप करें",
-    "loginNow": "अभी लॉगिन करें"
+    "loginNow": "अभी लॉगिन करें",
+    "pleaseLogin": "अपनी प्रोफ़ाइल एक्सेस करने के लिए कृपया लॉग इन करें"
   },
   "navigation": {
     "home": "होम",
@@ -57,7 +67,9 @@
     "books": "बही-खाता",
     "loans": "ऋण",
     "invoice": "चालान",
-    "calculator": "कैलकुलेटर"
+    "calculator": "कैलकुलेटर",
+    "tools": "उपकरण",
+    "password": "पासवर्ड"
   },
   "dashboard": {
     "welcome": "स्वागत है",
@@ -105,7 +117,24 @@
     "totalOutstanding": "कुल बकाया",
     "unconfirmed": "अपुष्ट",
     "afterSettlement": "निपटान के बाद",
-    "summary": "सारांश"
+    "summary": "सारांश",
+    "enterDetails": "लेनदेन के बारे में अतिरिक्त विवरण दर्ज करें...",
+    "uploadFile": "फ़ाइल अपलोड करें",
+    "clickToUpload": "फ़ाइल अपलोड करने के लिए क्लिक करें",
+    "fileTypes": "PNG, JPG, PDF 5MB तक",
+    "selected": "चयनित",
+    "createTransaction": "लेनदेन बनाएं",
+    "addedSuccessfully": "लेनदेन सफलतापूर्वक जोड़ा गया!",
+    "failedToCreate": "लेनदेन बनाने में विफल। कृपया पुनः प्रयास करें।",
+    "enterAmount": "राशि दर्ज करें",
+    "enterDescription": "विवरण दर्ज करें",
+    "attachment": "अटैचमेंट",
+    "adding": "जोड़ रहा है...",
+    "get": "प्राप्त",
+    "give": "देना",
+    "exportPDF": "पीडीएफ निर्यात",
+    "you will get": "आपको मिलेगा",
+    "you will give": "आपको देना है"
   },
   "calculator": {
     "basic": "बेसिक कैलकुलेटर",
@@ -120,6 +149,15 @@
   "profile": {
     "title": "आपकी प्रोफ़ाइल",
     "subtitle": "अपनी खाता जानकारी और सेटिंग्स प्रबंधित करें",
+    "updateProfile": "प्रोफाइल अपडेट करें",
+    "loading": {
+      "title": "आपकी प्रोफ़ाइल लोड हो रही है",
+      "subtitle": "कृपया एक क्षण प्रतीक्षा करें..."
+    },
+    "error": {
+      "title": "प्रोफ़ाइल लोड करने में असमर्थ",
+      "message": "कृपया पृष्ठ को रीफ्रेश करें या यदि समस्या बनी रहती है तो सपोर्ट से संपर्क करें।"
+    },
     "tabs": {
       "profile": "प्रोफ़ाइल",
       "security": "सुरक्षा",
@@ -136,8 +174,13 @@
     },
     "security": {
       "title": "सुरक्षा सेटिंग्स",
-      "changePassword": "पासवर्ड बदलें",
-      "twoFactor": "द्वि-कारक प्रमाणीकरण"
+      "changePassword": "पासवर्ड सेटिंग्स",
+      "changePasswordDesc": "अपना पासवर्ड बदलें या पासवर्ड रिकवरी सेट करें",
+      "twoFactor": "द्वि-कारक प्रमाणीकरण",
+      "twoFactorDesc": "अपने खाते में सुरक्षा की एक अतिरिक्त परत जोड़ें"
+    },
+    "preferences": {
+      "title": "उपयोगकर्ता प्राथमिकताएं"
     }
   },
   "errors": {
@@ -146,5 +189,200 @@
     "noInternet": "इंटरनेट कनेक्शन नहीं है",
     "tryAgain": "पुनः प्रयास करें",
     "somethingWentWrong": "कुछ गलत हो गया"
+  },
+  "invoice": {
+    "chooseTemplate": "इनवॉइस बनाने के लिए टेम्प्लेट चुनें",
+    "received": "प्राप्त किए गए",
+    "saved": "सहेजे गए",
+    "sent": "भेजे गए",
+    "useTemplate": "टेम्प्लेट का उपयोग करें",
+    "templates": {
+      "classic": {
+        "name": "क्लासिक इनवॉइस",
+        "description": "एक पेशेवर और साफ इनवॉइस लेआउट"
+      },
+      "modern": {
+        "name": "आधुनिक इनवॉइस",
+        "description": "बोल्ड टाइपोग्राफी के साथ समकालीन डिजाइन"
+      },
+      "minimal": {
+        "name": "मिनिमल इनवॉइस",
+        "description": "सरल और सीधा लेआउट"
+      },
+      "business": {
+        "name": "बिजनेस इनवॉइस",
+        "description": "विस्तृत विवरण के साथ कॉर्पोरेट स्टाइल"
+      }
+    }
+  },
+  "tools": {
+    "title": "उपकरण और सुविधाएँ",
+    "progress": {
+      "title": "उपकरण प्रगति",
+      "explored": "उपकरण का उपयोग किया गया",
+      "of": "में से",
+      "getStarted": "शुरू करें!",
+      "toolsUsed": "उपयोग किए गए उपकरण",
+      "levels": {
+        "beginner": "अभी शुरुआत की है",
+        "intermediate": "आधे रास्ते पर हैं",
+        "expert": "उपकरण विशेषज्ञ"
+      },
+      "notification": {
+        "title": "खोजने के लिए तैयार हैं?",
+        "message": "अपनी प्रगति का ट्रैक रखने के लिए किसी भी उपकरण का उपयोग करें"
+      }
+    },
+    "categories": {
+      "pdf": "पीडीएफ उपकरण",
+      "tasks": "कार्य प्रबंधन",
+      "calculators": "कैलकुलेटर",
+      "converters": "कन्वर्टर्स",
+      "misc": "विविध"
+    },
+    "viewTypes": {
+      "grid": "ग्रिड व्यू",
+      "list": "सूची व्यू"
+    },
+    "pdfTools": {
+      "searchExcel": "एक्सेल खोजें",
+      "imageToPdf": "इमेज से पीडीएफ",
+      "splitPdf": "पीडीएफ विभाजित करें",
+      "compressPdf": "पीडीएफ संपीड़ित करें",
+      "mergePdf": "पीडीएफ विलय करें",
+      "wordToPdf": "वर्ड से पीडीएफ",
+      "editPdf": "पीडीएफ संपादित करें",
+      "extractPages": "पृष्ठ निकालें",
+      "pdfCropper": "पीडीएफ क्रॉपर",
+      "addPageNumber": "पृष्ठ संख्या जोड़ें",
+      "protectPdf": "पीडीएफ सुरक्षित करें",
+      "unlockPdf": "पीडीएफ अनलॉक करें",
+      "pdfToImage": "पीडीएफ से इमेज",
+      "pdfToWord": "पीडीएफ से वर्ड",
+      "extractPage": "पृष्ठ निकालें",
+      "addPageNum": "पृष्ठ संख्या जोड़ें"
+    },
+    "taskTools": {
+      "groceryList": "किराना सूची",
+      "emailChecker": "ईमेल चेकर",
+      "emailSender": "ईमेल भेजने वाला",
+      "mapExtractor": "गूगल मैप एक्सट्रैक्टर",
+      "cardValidator": "कार्ड वैलिडेटर",
+      "cardGenerator": "कार्ड जनरेटर",
+      "templateGenerator": "एचटीएमएल टेम्पलेट जनरेटर",
+      "phoneFormatter": "फोन नंबर फॉर्मेटर",
+      "passwordGenerator": "रैंडम पासवर्ड जनरेटर",
+      "linkedinScraper": "लिंक्डइन स्क्रेपर",
+      "htmlTemplateGenerator": "एचटीएमएल टेम्पलेट जनरेटर",
+      "googleMapExtractor": "गूगल मैप एक्सट्रैक्टर",
+      "phoneNumberFormatter": "फोन नंबर फॉर्मेटर",
+      "randomPasswordGenerator": "रैंडम पासवर्ड जनरेटर"
+    },
+    "calculatorTools": {
+      "calculator": "कैलकुलेटर",
+      "percentageCalc": "% कैलकुलेटर",
+      "bmiCalc": "बीएमआई कैलकुलेटर",
+      "scientificCalc": "वैज्ञानिक कैलकुलेटर",
+      "compareLoan": "ऋण तुलना",
+      "currencyConverter": "मुद्रा परिवर्तक",
+      "fractionCalc": "भिन्न कैलकुलेटर",
+      "averageCalc": "औसत कैलकुलेटर",
+      "lcmCalc": "एलसीएम कैलकुलेटर",
+      "ageCalc": "आयु कैलकुलेटर",
+      "dateDiffCalc": "दिनांक अंतर कैलकुलेटर",
+      "compoundInterestCalc": "चक्रवृद्धि ब्याज कैलकुलेटर",
+      "simpleInterestCalc": "साधारण ब्याज कैलकुलेटर",
+      "discountCalc": "छूट कैलकुलेटर",
+      "gstCalc": "जीएसटी कैलकुलेटर",
+      "vatCalc": "वैट कैलकुलेटर",
+      "electricityBillCalc": "बिजली बिल कैलकुलेटर",
+      "testScoreCalc": "परीक्षा स्कोर कैलकुलेटर",
+      "percentageCalculator": "% कैलकुलेटर",
+      "bmiCalculator": "बीएमआई कैलकुलेटर",
+      "scientificCalculator": "वैज्ञानिक कैलकुलेटर",
+      "fractionCalculator": "भिन्न कैलकुलेटर",
+      "averageCalculator": "औसत कैलकुलेटर",
+      "lcmCalculator": "एलसीएम कैलकुलेटर",
+      "ageCalculator": "आयु कैलकुलेटर",
+      "dateDifferenceCalculator": "दिनांक अंतर कैलकुलेटर",
+      "compoundInterestCalculator": "चक्रवृद्धि ब्याज कैलकुलेटर",
+      "simpleInterestCalculator": "साधारण ब्याज कैलकुलेटर",
+      "discountCalculator": "छूट कैलकुलेटर",
+      "gstCalculator": "जीएसटी कैलकुलेटर",
+      "vatCalculator": "वैट कैलकुलेटर",
+      "electricityBillCalculator": "बिजली बिल कैलकुलेटर",
+      "testScoreCalculator": "परीक्षा स्कोर कैलकुलेटर"
+    },
+    "converterTools": {
+      "fahrenheitToCelsius": "फारेनहाइट से सेल्सियस",
+      "secondToHour": "सेकंड से घंटा",
+      "hourToSecond": "घंटा से सेकंड",
+      "textToSpeech": "टेक्स्ट से स्पीच",
+      "speechToText": "स्पीच से टेक्स्ट",
+      "onlineVoiceRecorder": "ऑनलाइन वॉइस रिकॉर्डर",
+      "onlineScreenRecorder": "ऑनलाइन स्क्रीन रिकॉर्डर",
+      "onlineScreenshot": "ऑनलाइन स्क्रीनशॉट",
+      "onlineWebcamTest": "ऑनलाइन वेबकैम टेस्ट",
+      "stopWatch": "स्टॉपवॉच",
+      "voiceRecorder": "ऑनलाइन वॉइस रिकॉर्डर",
+      "screenRecorder": "ऑनलाइन स्क्रीन रिकॉर्डर",
+      "screenshot": "ऑनलाइन स्क्रीनशॉट",
+      "webcamTest": "ऑनलाइन वेबकैम टेस्ट",
+      "calendar": "कैलेंडर",
+      "clock": "घड़ी",
+      "stopwatch": "स्टॉपवॉच",
+      "countdownTimer": "काउंटडाउन टाइमर",
+      "alarmClock": "अलार्म घड़ी",
+      "binaryToDecimal": "बाइनरी से डेसिमल"
+    },
+    "miscTools": {
+      "paypalLink": "पेपाल लिंक जनरेटर",
+      "htmlBeautifier": "एचटीएमएल ब्यूटीफायर",
+      "resumeBuilder": "रिज्यूमे बिल्डर",
+      "linkChecker": "वेबसाइट लिंक चेकर",
+      "wordCounter": "वर्ड काउंटर",
+      "trafficChecker": "ट्रैफिक चेकर"
+    }
+  },
+  "filters": {
+    "newestFirst": "नवीनतम पहले",
+    "oldestFirst": "सबसे पुराना पहले",
+    "amountHighToLow": "राशि (उच्च से निम्न)",
+    "amountLowToHigh": "राशि (निम्न से उच्च)",
+    "all": "सभी",
+    "confirmed": "पुष्टि किया गया",
+    "pending": "लंबित"
+  },
+  "viewMode": {
+    "listView": "सूची दृश्य",
+    "gridView": "ग्रिड दृश्य"
+  },
+  "whatsapp": {
+    "sendReminders": "अनुस्मारक भेजें"
+  },
+  "tableView": {
+    "responses": "प्रतिक्रियाएं",
+    "viewResponse": "प्रतिक्रिया देखें",
+    "submitResponse": "प्रतिक्रिया भेजें",
+    "enterResponse": "अपनी प्रतिक्रिया दर्ज करें",
+    "submitting": "भेज रहा है...",
+    "closeResponse": "प्रतिक्रिया बंद करें",
+    "viewDetails": "विवरण देखें",
+    "noResponsesYet": "अभी तक कोई प्रतिक्रिया नहीं",
+    "errorFetchingResponses": "प्रतिक्रियाएं प्राप्त करने में त्रुटि",
+    "date": "दिनांक",
+    "type": "प्रकार",
+    "amount": "राशि",
+    "description": "विवरण",
+    "status": "स्थिति",
+    "actions": "कार्रवाई",
+    "edit": "संपादित करें",
+    "delete": "हटाएं",
+    "split": "विभाजित करें",
+    "file": "फ़ाइल",
+    "confirm": "पुष्टि करें",
+    "pending": "लंबित",
+    "confirmed": "पुष्टि की गई",
+    "sendReminder": "अनुस्मारक भेजें"
   }
 }

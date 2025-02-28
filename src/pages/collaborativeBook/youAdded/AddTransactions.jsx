@@ -1,18 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, LazyMotion, domAnimation } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import Modal from "./Modal";
 import { fetchClients, fetchBooks, createTransaction } from "./api";
 import { trackTransaction, trackError } from "../../../utils/analytics";
 import { ClientRefreshContext } from "../../Layout/Layout";
 
 const AddTransactions = () => {
+  const { t } = useTranslation();
   const [clientUserId, setClientUserId] = useState("");
   const [bookId, setBookId] = useState("");
   const [transactionType, setTransactionType] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
-  const [file, setFile] = useState(null); // State to store the file
+  const [file, setFile] = useState(null);
   const navigate = useNavigate();
   const { refreshClientTrigger } = useContext(ClientRefreshContext);
 
@@ -97,15 +99,14 @@ const AddTransactions = () => {
   };
 
   const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0]; // Get the selected file
+    const selectedFile = e.target.files[0];
     if (selectedFile) {
-      setFile(selectedFile); // Store it in the state
+      setFile(selectedFile);
     }
   };
 
   const handleAmountChange = (e) => {
     const value = e.target.value;
-    // Only allow numbers and decimal point
     if (/^\d*\.?\d*$/.test(value) || value === "") {
       setAmount(value);
     }
@@ -126,14 +127,14 @@ const AddTransactions = () => {
           <div className="bg-white dark:bg-gray-800 dark:text-white shadow-xl rounded-lg p-6 space-y-6">
             <div className="flex items-center justify-between">
               <h1 className="text-3xl font-bold dark:text-white text-gray-900">
-                Add Transaction
+                {t("transactions.addTransaction")}
               </h1>
               <button
                 type="button"
                 onClick={Goback}
                 className="inline-flex dark:text-white items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-gray-700 bg-gray-100 dark:bg-gray-900 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-200"
               >
-                ← Go Back
+                ← {t("common.back")}
               </button>
             </div>
 
@@ -144,7 +145,7 @@ const AddTransactions = () => {
                     htmlFor="clientUserId"
                     className="block text-sm font-medium dark:text-white text-gray-700"
                   >
-                    Client
+                    {t("common.user")}
                   </label>
                   <div className="relative">
                     <select
@@ -154,11 +155,13 @@ const AddTransactions = () => {
                       className="mt-1 block w-full pl-3 pr-10 py-2 text-base text-gray-500 dark:text-white bg-white dark:bg-gray-700 border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm appearance-none"
                       required
                     >
-                      <option value="">Select Client</option>
+                      <option value="">
+                        {t("common.search")} {t("common.user")}
+                      </option>
                       {isLoadingClients ? (
-                        <option>Loading clients...</option>
+                        <option>{t("common.loading")}</option>
                       ) : clients.length === 0 ? (
-                        <option>No clients available</option>
+                        <option>{t("common.noData")}</option>
                       ) : (
                         clients.map((client) => (
                           <option key={client._id} value={client._id}>
@@ -189,7 +192,7 @@ const AddTransactions = () => {
                     htmlFor="bookId"
                     className="block text-sm font-medium dark:text-white text-gray-700"
                   >
-                    Book
+                    {t("common.bookName")}
                   </label>
                   <div className="relative">
                     <select
@@ -199,11 +202,13 @@ const AddTransactions = () => {
                       className="mt-1 block w-full pl-3 pr-10 py-2 text-gray-500 dark:text-white text-base bg-white dark:bg-gray-700 border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm appearance-none"
                       required
                     >
-                      <option value="">Select Book</option>
+                      <option value="">
+                        {t("common.search")} {t("common.bookName")}
+                      </option>
                       {isLoadingBooks ? (
-                        <option>Loading books...</option>
+                        <option>{t("common.loading")}</option>
                       ) : books.length === 0 ? (
-                        <option>No books available</option>
+                        <option>{t("common.noData")}</option>
                       ) : (
                         books.map((book) => (
                           <option key={book._id} value={book._id}>
@@ -236,7 +241,7 @@ const AddTransactions = () => {
                     htmlFor="transactionType"
                     className="block text-sm font-medium dark:text-white text-gray-700"
                   >
-                    Transaction Type
+                    {t("transactions.transactionType")}
                   </label>
                   <select
                     id="transactionType"
@@ -245,12 +250,14 @@ const AddTransactions = () => {
                     className="mt-1 block w-full pl-3 pr-10 py-2 text-gray-500 dark:text-white text-base bg-white dark:bg-gray-700 border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm"
                     required
                   >
-                    <option value="">Select Transaction Type</option>
+                    <option value="">
+                      {t("common.search")} {t("transactions.transactionType")}
+                    </option>
                     <option value="you will get" className="text-green-600">
-                      You will get
+                      {t("transactions.youWillGet")}
                     </option>
                     <option value="you will give" className="text-red-600">
-                      You will give
+                      {t("transactions.youWillGive")}
                     </option>
                   </select>
                 </div>
@@ -260,7 +267,7 @@ const AddTransactions = () => {
                     htmlFor="amount"
                     className="block text-sm font-medium dark:text-white text-gray-700"
                   >
-                    Amount
+                    {t("transactions.amount")}
                   </label>
                   <div className="mt-1 relative rounded-md shadow-sm">
                     <input
@@ -292,8 +299,10 @@ const AddTransactions = () => {
                     htmlFor="description"
                     className="block text-sm font-medium dark:text-white text-gray-700"
                   >
-                    Description{" "}
-                    <span className="text-gray-400 text-xs">(optional)</span>
+                    {t("transactions.description")}{" "}
+                    <span className="text-gray-400 text-xs">
+                      ({t("common.optional")})
+                    </span>
                   </label>
                 </div>
                 <div className="mt-1">
@@ -303,7 +312,7 @@ const AddTransactions = () => {
                     onChange={(e) => setDescription(e.target.value)}
                     rows={3}
                     className="shadow-sm p-2 focus:ring-indigo-500 dark:border-none bg-white dark:bg-gray-700 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
-                    placeholder="Enter additional details about the transaction..."
+                    placeholder={t("transactions.enterDetails")}
                   />
                 </div>
               </div>
@@ -311,8 +320,10 @@ const AddTransactions = () => {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <label className="block text-sm font-medium dark:text-white text-gray-700">
-                    Upload File{" "}
-                    <span className="text-gray-400 text-xs">(optional)</span>
+                    {t("transactions.uploadFile")}{" "}
+                    <span className="text-gray-400 text-xs">
+                      ({t("common.optional")})
+                    </span>
                   </label>
                 </div>
                 <label className="mt-1 flex justify-center px-6 pt-5 dark:bg-gray-700 pb-6 border-2 border-gray-300 border-dashed rounded-md hover:border-indigo-500 transition-colors duration-200 bg-gray-50">
@@ -332,7 +343,7 @@ const AddTransactions = () => {
                           strokeLinejoin="round"
                         />
                       </svg>
-                      <span>Click to upload a file</span>
+                      <span>{t("transactions.clickToUpload")}</span>
                       <input
                         id="file"
                         type="file"
@@ -341,14 +352,14 @@ const AddTransactions = () => {
                       />
 
                       <p className="text-xs text-gray-500 mt-2">
-                        PNG, JPG, PDF up to 5MB
+                        {t("transactions.fileTypes")}
                       </p>
                     </div>
                   </div>
                 </label>
                 {file && (
                   <p className="text-sm text-indigo-600 mt-2">
-                    Selected: {file.name}
+                    {t("transactions.selected")}: {file.name}
                   </p>
                 )}
               </div>
@@ -360,7 +371,7 @@ const AddTransactions = () => {
                   type="submit"
                   className="inline-flex justify-center py-2 dark:text-white px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200"
                 >
-                  Create Transaction
+                  {t("transactions.createTransaction")}
                 </motion.button>
               </div>
             </form>
@@ -372,15 +383,15 @@ const AddTransactions = () => {
             isOpen={showSuccessModal}
             onClose={handleSuccessModalClose}
             type="success"
-            title="Success"
-            message="Transaction added successfully!"
+            title={t("common.success")}
+            message={t("transactions.addedSuccessfully")}
           />
         )}
 
         {showFailureModal && (
           <Modal
             type="failure"
-            message="Failed to create transaction. Please try again."
+            message={t("transactions.failedToCreate")}
             onClose={() => setShowFailureModal(false)}
           />
         )}

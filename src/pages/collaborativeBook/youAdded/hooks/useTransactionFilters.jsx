@@ -18,6 +18,11 @@ export const useTransactionFilters = (transaction) => {
   console.log('useTransactionFilters - transaction:', transaction);
   console.log('useTransactionFilters - history:', transaction?.transactionHistory);
 
+  // Reset to first page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [statusFilter, addedByFilter, sortConfig]);
+
   const filteredAndSortedTransactions = useMemo(() => {
     if (!transaction?.transactionHistory) {
       console.log('No transaction history found');
@@ -28,43 +33,48 @@ export const useTransactionFilters = (transaction) => {
 
     let filteredData = [...transaction.transactionHistory];
 
+    // Apply status filter
     if (statusFilter !== "all") {
-      filteredData = filteredData.filter(
-        (item) => item.confirmationStatus === statusFilter
-      );
-    }
-
-    if (addedByFilter !== "all") {
       filteredData = filteredData.filter((item) => {
-        if (addedByFilter === "user") {
-          return item.initiatedBy === transaction?.userId?.name;
-        } else {
-          return item.initiatedBy === transaction?.clientUserId?.name;
+        if (statusFilter === "confirmed") {
+          return item.confirmationStatus === "confirmed";
+        } else if (statusFilter === "pending") {
+          return !item.confirmationStatus || item.confirmationStatus === "pending";
         }
+        return true;
       });
     }
 
-    switch (sortConfig.key) {
-      case "transactionDate":
-        filteredData.sort((a, b) => {
+    // Apply added by filter
+    if (addedByFilter !== "all") {
+      filteredData = filteredData.filter((item) => {
+        if (addedByFilter === "user") {
+          return item.initiaterId === transaction?.userId?._id;
+        } else if (addedByFilter === "client") {
+          return item.initiaterId === transaction?.clientUserId?._id;
+        }
+        return true;
+      });
+    }
+
+    // Apply sorting
+    return filteredData.sort((a, b) => {
+      switch (sortConfig.key) {
+        case "transactionDate": {
           const dateA = new Date(a.transactionDate).getTime();
           const dateB = new Date(b.transactionDate).getTime();
           return sortConfig.direction === "asc" ? dateA - dateB : dateB - dateA;
-        });
-        break;
-      case "amount":
-        filteredData.sort((a, b) => {
-          const amountA = parseFloat(a.amount);
-          const amountB = parseFloat(b.amount);
+        }
+        case "amount": {
+          const amountA = parseFloat(a.amount) || 0;
+          const amountB = parseFloat(b.amount) || 0;
           return sortConfig.direction === "asc" ? amountA - amountB : amountB - amountA;
-        });
-        break;
-      default:
-        break;
-    }
-
-    return filteredData;
-  }, [transaction?.transactionHistory, sortConfig, statusFilter, addedByFilter]);
+        }
+        default:
+          return 0;
+      }
+    });
+  }, [transaction, sortConfig, statusFilter, addedByFilter]);
 
   const paginatedTransactions = useMemo(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;

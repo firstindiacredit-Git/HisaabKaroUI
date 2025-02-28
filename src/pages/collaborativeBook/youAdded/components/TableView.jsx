@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { MdEdit, MdDelete } from "react-icons/md";
 import {
   AiOutlineFileImage,
@@ -6,7 +7,8 @@ import {
   AiOutlineClockCircle,
   AiOutlineInfoCircle,
    AiOutlineMessage,
-  AiOutlineEye,
+  AiOutlineEye
+  ,
 } from "react-icons/ai";
 import { BsFilePdf } from "react-icons/bs";
 import { BiGitBranch } from "react-icons/bi";
@@ -27,6 +29,7 @@ export const TableView = ({
   setShowDescriptionModal,
   transaction,
 }) => {
+  const { t } = useTranslation();
   const [responseModal, setResponseModal] = useState({ isOpen: false, entryId: null });
   const [viewResponseModal, setViewResponseModal] = useState({ isOpen: false, response: null });
   const [currentResponse, setCurrentResponse] = useState('');
@@ -128,28 +131,28 @@ export const TableView = ({
                 #
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium dark:text-gray-400 text-gray-500 uppercase tracking-wider">
-                Date
+                {t('tableView.date')}
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium dark:text-gray-400 text-gray-500 uppercase tracking-wider">
-                Initiated By
+                {t('common.addedBy')}
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium dark:text-gray-400 text-gray-500 uppercase tracking-wider">
-                Type
+                {t('tableView.type')}
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium dark:text-gray-400 text-gray-500 uppercase tracking-wider">
-                Amount
+                {t('tableView.amount')}
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium dark:text-gray-400 text-gray-500 uppercase tracking-wider">
-                Description
+                {t('tableView.description')}
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium dark:text-gray-400 text-gray-500 uppercase tracking-wider">
-                File
+                {t('tableView.file')}
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium dark:text-gray-400 text-gray-500 uppercase tracking-wider">
-                Status
+                {t('tableView.status')}
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium dark:text-gray-400 text-gray-500 uppercase tracking-wider">
-                Actions
+                {t('tableView.actions')}
               </th>
             </tr>
           </thead>
@@ -175,7 +178,7 @@ export const TableView = ({
                         : "bg-red-100 text-red-800"
                     }`}
                   >
-                    {entry.transactionType}
+                    {t(`transactions.${entry.transactionType}`)}
                   </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
@@ -198,7 +201,7 @@ export const TableView = ({
                       }}
                       className="text-blue-600 hover:text-blue-800"
                     >
-                      View
+                      {t('tableView.viewDetails')}
                     </button>
                   ) : (
                     <span className="text-gray-400">--</span>
@@ -209,6 +212,7 @@ export const TableView = ({
                     <button
                       onClick={() => handleFileClick({ ...entry })}
                       className="flex items-center text-blue-600 hover:text-blue-800"
+                      title={t('tableView.viewFile')}
                     >
                       {entry.file.toLowerCase().endsWith('.pdf') ? (
                         <BsFilePdf className="w-5 h-5" />
@@ -229,7 +233,7 @@ export const TableView = ({
                     {entry.confirmationStatus === "confirmed" ? (
                       <>
                         <AiOutlineCheckCircle className="w-4 h-4 mr-1" />
-                        <span className="text-sm">Confirmed</span>
+                        <span className="text-sm">{t('tableView.confirmed')}</span>
                       </>
                     ) : (
                       userId !== entry.initiaterId ? (
@@ -240,12 +244,12 @@ export const TableView = ({
                             updatingId === entry._id ? 'opacity-50 cursor-not-allowed' : ''
                           }`}
                         >
-                          {updatingId === entry._id ? "Updating..." : "Confirm"}
+                          {updatingId === entry._id ? t('common.loading') : t('tableView.confirm')}
                         </button>
                       ) : (
                         <div className="flex items-center">
                           <AiOutlineClockCircle className="w-4 h-4 mr-1" />
-                          <span className="text-sm">Pending</span>
+                          <span className="text-sm">{t('tableView.pending')}</span>
                         </div>
                       )
                     )}
@@ -258,21 +262,21 @@ export const TableView = ({
                         <button
                           onClick={() => handleEditClick(entry)}
                           className="p-1.5 rounded-full hover:bg-gray-100 transition-colors text-yellow-500"
-                          title="Edit"
+                          title={t('tableView.edit')}
                         >
                           <MdEdit className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => handleDeleteClick(entry)}
                           className="p-1.5 rounded-full hover:bg-gray-100 transition-colors text-red-500"
-                          title="Delete"
+                          title={t('tableView.delete')}
                         >
                           <MdDelete className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => handleSplitClick(entry)}
                           className="p-1.5 rounded-full hover:bg-gray-100 transition-colors text-blue-500"
-                          title="Split Transaction"
+                          title={t('tableView.split')}
                         >
                           <BiGitBranch className="w-4 h-4" />
                         </button>
@@ -282,7 +286,7 @@ export const TableView = ({
                         <button
                           onClick={() => openResponseModal(entry._id)}
                           className="p-1.5 rounded-full hover:bg-gray-100 transition-colors text-blue-600"
-                          title="Add Response"
+                          title={t('tableView.submitResponse')}
                         >
                           <AiOutlineMessage className="w-4 h-4" />
                         </button>
@@ -290,7 +294,7 @@ export const TableView = ({
                           <button
                             onClick={() => openViewResponseModal(responses[entry._id])}
                             className="p-1.5 rounded-full hover:bg-gray-100 transition-colors text-green-600"
-                            title="View Response"
+                            title={t('tableView.viewResponse')}
                           >
                             <AiOutlineEye className="w-4 h-4" />
                           </button>
@@ -339,7 +343,7 @@ export const TableView = ({
                         ? "bg-green-100 text-green-800"
                         : "bg-red-100 text-red-800"
                     }`}>
-                      {entry.transactionType}
+                      {t(`transactions.${entry.transactionType}`)}
                     </span>
                   </div>
 
@@ -364,7 +368,7 @@ export const TableView = ({
                             updatingId === entry._id ? 'opacity-50 cursor-not-allowed' : ''
                           }`}
                         >
-                          {updatingId === entry._id ? "..." : "Confirm"}
+                          {updatingId === entry._id ? "..." : t('tableView.confirm')}
                         </button>
                       ) : (
                         <AiOutlineClockCircle className="w-3.5 h-3.5" />
@@ -408,21 +412,21 @@ export const TableView = ({
                           <button
                             onClick={() => handleEditClick(entry)}
                             className="p-1 text-yellow-500"
-                            title="Edit"
+                            title={t('tableView.edit')}
                           >
                             <MdEdit className="w-3.5 h-3.5" />
                           </button>
                           <button
                             onClick={() => handleDeleteClick(entry)}
                             className="p-1 text-red-500"
-                            title="Delete"
+                            title={t('tableView.delete')}
                           >
                             <MdDelete className="w-3.5 h-3.5" />
                           </button>
                           <button
                             onClick={() => handleSplitClick(entry)}
                             className="p-1 text-blue-500"
-                            title="Split Transaction"
+                            title={t('tableView.split')}
                           >
                             <BiGitBranch className="w-3.5 h-3.5" />
                           </button>
@@ -432,7 +436,7 @@ export const TableView = ({
                           <button
                             onClick={() => openResponseModal(entry._id)}
                             className="p-1 text-blue-600"
-                            title="Add Response"
+                            title={t('tableView.submitResponse')}
                           >
                             <AiOutlineMessage className="w-3.5 h-3.5" />
                           </button>
@@ -440,7 +444,7 @@ export const TableView = ({
                             <button
                               onClick={() => openViewResponseModal(responses[entry._id])}
                               className="p-1 text-green-600"
-                              title="View Response"
+                              title={t('tableView.viewResponse')}
                             >
                               <AiOutlineEye className="w-3.5 h-3.5" />
                             </button>

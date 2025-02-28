@@ -1,51 +1,81 @@
-import React from 'react';
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-const ActionButtons = ({ 
-  transaction, 
+const ActionButtons = ({
+  transaction,
   transactionTableRef,
-  initiateNewTransaction
+  initiateNewTransaction,
 }) => {
+  const { t } = useTranslation();
+
   const buttons = [
     {
-      type: 'get',
+      type: "get",
       onClick: () => initiateNewTransaction("you will get"),
-      className: "bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700",
+      className:
+        "bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700",
       icon: (
-        <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+        <svg
+          className="w-5 h-5 mr-2"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+          />
         </svg>
       ),
-      text: "You Will Get",
-      mobileText: "Get"
+      text: t("transactions.youWillGet"),
+      mobileText: t("transactions.get"),
     },
     {
-      type: 'give',
+      type: "give",
       onClick: () => initiateNewTransaction("you will give"),
-      className: "bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-600 hover:to-rose-700",
+      className:
+        "bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-600 hover:to-rose-700",
       icon: (
-        <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 12H4" />
+        <svg
+          className="w-5 h-5 mr-2"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M20 12H4"
+          />
         </svg>
       ),
-      text: "You Will Give",
-      mobileText: "Give"
+      text: t("transactions.youWillGive"),
+      mobileText: t("transactions.give"),
     },
     {
-      type: 'export',
+      type: "export",
       onClick: () => {
         if (transaction && transactionTableRef.current) {
           transactionTableRef.current.exportToPDF();
         }
       },
-      className: "bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700",
+      className:
+        "bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700",
       icon: (
         <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586L7.707 10.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clipRule="evenodd" />
+          <path
+            fillRule="evenodd"
+            d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586L7.707 10.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z"
+            clipRule="evenodd"
+          />
         </svg>
       ),
-      text: "Export PDF",
-      mobileText: "Export PDF"
-    }
+      text: t("transactions.exportPDF"),
+      mobileText: t("transactions.exportPDF"),
+    },
   ];
 
   return (
@@ -73,20 +103,26 @@ const ActionButtons = ({
             key={button.type}
             type="button"
             onClick={button.onClick}
-            className={`flex items-center justify-center px-4 py-2.5 ${button.className.replace('hover:', 'active:')} 
+            className={`flex items-center justify-center px-4 py-2.5 ${button.className.replace(
+              "hover:",
+              "active:"
+            )} 
               text-white font-medium rounded-xl shadow-md text-sm`}
           >
-            {React.cloneElement(button.icon, { className: 'w-4 h-4 mr-1.5' })}
+            {React.cloneElement(button.icon, { className: "w-4 h-4 mr-1.5" })}
             {button.mobileText}
           </button>
         ))}
         <button
           type="button"
           onClick={buttons[2].onClick}
-          className={`flex items-center justify-center px-4 py-2.5 ${buttons[2].className.replace('hover:', 'active:')} 
+          className={`flex items-center justify-center px-4 py-2.5 ${buttons[2].className.replace(
+            "hover:",
+            "active:"
+          )} 
             text-white font-medium rounded-xl shadow-md text-sm col-span-2`}
         >
-          {React.cloneElement(buttons[2].icon, { className: 'w-4 h-4 mr-1.5' })}
+          {React.cloneElement(buttons[2].icon, { className: "w-4 h-4 mr-1.5" })}
           {buttons[2].mobileText}
         </button>
       </div>

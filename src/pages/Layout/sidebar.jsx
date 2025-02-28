@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   FaTachometerAlt,
   FaUsers,
-  
   FaBook,
-
   FaReceipt,
   FaFileInvoiceDollar,
   FaTools,
@@ -181,8 +179,8 @@ const Sidebar = () => {
     { path: "/users", icon: FaUsers, label: t("navigation.users") },
     // { path: "/loans", icon: FaHandHoldingUsd, label: t('navigation.loans') },
     { path: "/invoice", icon: FaReceipt, label: t("navigation.invoice") },
-    { path: "/tools", icon: FaTools, label: "Tools" },
-    { path: "/password", icon: FaLock, label: "Password" },
+    { path: "/tools", icon: FaTools, label: t("navigation.tools") },
+    { path: "/password", icon: FaLock, label: t("navigation.password") },
   ];
 
   return (
@@ -254,14 +252,13 @@ const Sidebar = () => {
       </nav>
 
       {/* Transaction Summary Section */}
-   
-        <div className="px-2 py-0.5 border-t border-slate-200 dark:border-gray-600 bg-gray-50 dark:text-white dark:bg-gray-600">
-          <h2 className="text-[9px] dark:text-white font-semibold text-slate-600 mb-0.5">
-            {t("transactions.summary")}
-          </h2>
-          <SidebarTransactionSummary transactions={transactions} />
-        </div>
-   
+
+      <div className="px-2 py-0.5 border-t border-slate-200 dark:border-gray-600 bg-gray-50 dark:text-white dark:bg-gray-600">
+        <h2 className="text-[9px] dark:text-white font-semibold text-slate-600 mb-0.5">
+          {t("transactions.summary")}
+        </h2>
+        <SidebarTransactionSummary transactions={transactions} />
+      </div>
 
       {/* Logout Button */}
       {/* <div className="p-1.5">

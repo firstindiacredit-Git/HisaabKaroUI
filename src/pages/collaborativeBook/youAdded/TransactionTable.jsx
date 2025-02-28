@@ -236,7 +236,7 @@ const TransactionTable = forwardRef(
           />
         ) : (
           <TableView 
-            paginatedTransactions={enrichedTransactions}
+            paginatedTransactions={paginatedTransactions}
             userId={userId}
             updating={updating}
             handleEditClick={handleEditClick}

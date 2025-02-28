@@ -983,7 +983,7 @@ const CollaborativeBookRecords = () => {
         hover:from-green-600 hover:to-emerald-700 transform hover:scale-105 transition-all duration-200 shadow-md"
       >
         <PlusOutlined className="mr-2" />
-        <span className="font-semibold">You Will Get</span>
+        <span className="font-semibold">Receive</span>
       </button>
       <button
         onClick={() => {
@@ -997,7 +997,7 @@ const CollaborativeBookRecords = () => {
         hover:from-red-600 hover:to-rose-700 transform hover:scale-105 transition-all duration-200 shadow-md"
       >
         <MinusOutlined className="mr-2" />
-        <span className="font-semibold">You Will Give</span>
+        <span className="font-semibold">Send</span>
       </button>
       <button
         className="flex-1 sm:flex-none flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-xl 
