@@ -953,7 +953,7 @@ const CredentialManager = () => {
 
                 {/* Modal Content */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 max-w-[90vw]">
-                  <div className="dark:bg-[#513a7a] bg-white p-8 rounded-lg shadow-xl">
+                  <div className="dark:bg-gray-900 bg-white p-8 rounded-lg shadow-xl">
                     <h2 className="text-2xl mb-4 dark:text-gray-100">
                       {currentCredential ? "Edit Credential" : "Add Credential"}
                     </h2>

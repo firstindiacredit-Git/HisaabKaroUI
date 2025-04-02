@@ -10,7 +10,7 @@ import { useAuth } from "../../context/AuthContext";
 const BarChart = React.lazy(() => import("./BarChart"));
 const PieChart = React.lazy(() => import("./PieChart"));
 // const TransactionList = React.lazy(() => import("./TransactionList"));
-const TransactionDetails = React.lazy(() => import("./TransactionDetails"));
+// const TransactionDetails = React.lazy(() => import("./TransactionDetails"));
 
 const Home = () => {
   const navigate = useNavigate();
@@ -256,7 +256,7 @@ const Home = () => {
               <TransactionList />
             </Suspense>
           </div> */}
-          <div className="bg-white p-6 dark:bg-gray-700 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300">
+          {/* <div className="bg-white p-6 dark:bg-gray-700 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300">
             <Suspense
               fallback={
                 <div className="h-64 bg-gray-100 animate-pulse rounded-lg"></div>
@@ -264,11 +264,11 @@ const Home = () => {
             >
               <TransactionDetails />
             </Suspense>
-          </div>
+          </div> */}
         </div>
 
         {/* Dashboard Button */}
-        <div className="flex justify-center py-6">
+        <div className="flex justify-center -mt-12 py-6">
           <button
             onClick={handleDashboardClick}
             className="px-8 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
