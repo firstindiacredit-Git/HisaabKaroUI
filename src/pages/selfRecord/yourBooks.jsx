@@ -79,14 +79,14 @@ const YourBooks = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="min-h-screen w-full bg-white dark:bg-gray-900 dark:text-white p-6">
+    <div className="min-h-screen w-full bg-white dark:bg-gray-900 dark:text-white p-3 md:p-6">
       <div className=" mx-auto">
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-between items-center md:mb-8 mb-2">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+            <h1 className=" md:text-3xl text-2xl font-bold text-gray-900 dark:text-white">
               Your Books
             </h1>
-            <p className="mt-2 text-gray-600 dark:text-gray-400">
+            <p className="md:mt-2 md:text-lg text-sm text-gray-600 dark:text-gray-400">
               Track your financial records
             </p>
           </div>
@@ -95,7 +95,7 @@ const YourBooks = () => {
             className="px-5 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer flex items-center gap-2 hover:-translate-y-0.5"
           >
             <FaPlus size={16} />
-            <span className="font-medium">New Book</span>
+            <span className="font-medium hidden md:block">New Book</span>
           </div>
         </div>
 

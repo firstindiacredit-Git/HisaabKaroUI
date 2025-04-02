@@ -5,7 +5,7 @@ import EmojiPicker from "emoji-picker-react";
 import axios from "../config/axios";
 import "./MessageModel.css";
 // Configure axios defaults
-axios.defaults.baseURL = 'http://localhost:5100'; // Add your backend URL
+axios.defaults.baseURL = 'https://hisaabkaro.com'; // Add your backend URL
 axios.defaults.withCredentials = true;
 
 const MessageModal = ({
