@@ -89,7 +89,7 @@ const CredentialManager = () => {
 
   // API configuration
   const api = axios.create({
-    baseURL: "http://localhost:5100/api",
+    baseURL: process.env.REACT_APP_URL || 'http://localhost:5100/api',
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.getItem("token")}`,
