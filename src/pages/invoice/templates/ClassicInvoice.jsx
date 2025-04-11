@@ -202,20 +202,27 @@ const ClassicInvoice = () => {
       setLoading(true);
       const invoice = invoiceRef.current;
       const canvas = await html2canvas(invoice, {
-        scale: 2,
+  
         useCORS: true,
         logging: false,
+        margin:4,
+        marginRight:10,
       });
 
-      const imgWidth = 210; // A4 width in mm
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      const margin = 8; // Margin in mm
+      const imgWidth = 210 - 2 * margin; // A4 width minus left and right margins
+      const imgHeight = (canvas.height * imgWidth) / canvas.width; // Maintain aspect ratio
       const pdf = new jsPDF("p", "mm", "a4");
+
+      // Center the image on the A4 page with margins
+      const xOffset = margin; // Left margin
+      const yOffset = margin; // Top margin
 
       pdf.addImage(
         canvas.toDataURL("image/png"),
         "PNG",
-        0,
-        0,
+        xOffset,
+        yOffset,
         imgWidth,
         imgHeight
       );

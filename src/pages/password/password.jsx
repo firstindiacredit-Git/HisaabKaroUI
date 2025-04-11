@@ -112,7 +112,7 @@ const CredentialManager = () => {
   // Fetch all passwords
   const fetchPasswords = async () => {
     try {
-      const response = await api.get("/passwords");
+      const response = await api.get("/api/passwords");
       setCredentials(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       message.error("Failed to fetch passwords");
@@ -124,7 +124,7 @@ const CredentialManager = () => {
   // Add new password
   const addNewPassword = async (passwordData) => {
     try {
-      const response = await api.post("/passwords", passwordData);
+      const response = await api.post("/api/passwords", passwordData);
       setCredentials((prevCreds) => [
         ...(Array.isArray(prevCreds) ? prevCreds : []),
         response.data,
@@ -215,7 +215,7 @@ const CredentialManager = () => {
   const handleUnlock = async () => {
     const enteredpin = pin.join("");
     try {
-      const response = await api.post(`/users/verify-pin/${userId}`, { pin: enteredpin });
+      const response = await api.post(`/api/users/verify-pin/${userId}`, { pin: enteredpin });
       if (response.status === 200) {
         setIsLocked(false);
         setpin(["", "", "", ""]);

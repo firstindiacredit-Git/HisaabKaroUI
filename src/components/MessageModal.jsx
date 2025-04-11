@@ -5,7 +5,7 @@ import EmojiPicker from "emoji-picker-react";
 import axios from "../config/axios";
 import "./MessageModel.css";
 // Configure axios defaults
-axios.defaults.baseURL = process.env.REACT_APP_URL ||'http://localhost:5100/'; // Add your backend URL
+axios.defaults.baseURL = process.env.REACT_APP_URL; // Add your backend URL
 axios.defaults.withCredentials = true;
 
 const MessageModal = ({
@@ -36,7 +36,7 @@ const MessageModal = ({
   const fetchTransactionDetails = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(`/api/transactions/${transactionId}`, {
+      const response = await axios.get(`${process.env.REACT_APP_URL}/api/transactions/${transactionId}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -106,7 +106,7 @@ const MessageModal = ({
         throw new Error("No authentication token found.");
       }
 
-      const response = await axios.get(`/api/messages/messages/${transactionId}/${entryId}`, {
+      const response = await axios.get(`${process.env.REACT_APP_URL}/api/messages/messages/${transactionId}/${entryId}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',

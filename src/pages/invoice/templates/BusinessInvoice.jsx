@@ -68,7 +68,7 @@ const BusinessInvoice = () => {
   const navigate = useNavigate();
 
   // Define constants for API URLs
-  const API_URL = "http://localhost:5100/api/v3/client/getAll-clients";
+  const API_URL = process.env.REACT_APP_URL || "http://localhost:5100/api/v3/client/getAll-clients";
 
   // Update the currency sorting and grouping logic
   const getUniqueCurrencies = () => {
