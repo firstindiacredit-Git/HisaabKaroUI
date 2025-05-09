@@ -511,7 +511,7 @@ const ClientUsers = () => {
                   </div>
 
                   {/* Quick Stats */}
-                  <div className="grid grid-cols-2 gap-4 mt-2 pt-6 border-t border-gray-100 dark:border-gray-700">
+                  {/* <div className="grid grid-cols-2 gap-4 mt-2 pt-6 border-t border-gray-100 dark:border-gray-700">
                     <div className="text-center p-3 -mt-2 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
                       <p className="text-xl font-bold text-gray-900 dark:text-white">
                         {userTransactions[user._id]?.count || 0}
@@ -519,8 +519,8 @@ const ClientUsers = () => {
                       <p className="text-xs text-gray-500 dark:text-gray-400">
                         Transactions
                       </p>
-                    </div>
-                    <div className="text-center p-3 -mt-2 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
+                    </div> */}
+                    {/* <div className="text-center p-3 -mt-2 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
                       <p className="text-xl font-bold text-gray-900 dark:text-white">
                         ₹
                         {(
@@ -533,8 +533,8 @@ const ClientUsers = () => {
                       <p className="text-xs text-gray-500 dark:text-gray-400">
                         Total Value
                       </p>
-                    </div>
-                  </div>
+                    </div> */}
+                  {/* </div> */}
 
                   {/* Loading State for Stats */}
                   {!userTransactions[user._id] && (

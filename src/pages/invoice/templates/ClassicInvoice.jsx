@@ -181,7 +181,7 @@ const ClassicInvoice = () => {
         Modal.success({
           title: "Success",
           content: "Invoice sent successfully!",
-          onOk: () => navigate("/invoice/sent"),
+          onOk: () => navigate("/invoice"),
         });
       }
     } catch (error) {

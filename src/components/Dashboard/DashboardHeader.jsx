@@ -55,7 +55,7 @@ const DashboardHeader = ({
           {viewMode === "list" ? (
             <>
               <AiOutlineAppstore className="text-lg" />
-              <span className="hidden md:inline ml-2">
+              <span className="hidden  md:inline ml-2">
                 {t("common.gridView")}
               </span>
             </>

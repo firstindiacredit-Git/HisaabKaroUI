@@ -260,7 +260,7 @@ export const TableView = ({
                       <button
                         onClick={() => updateTransactionStatus(entry._id)}
                         disabled={updating}
-                        className="px-3 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600 transition-colors disabled:opacity-50"
+                        className="px-4 py-1.5 bg-blue-500 text-white text-xs rounded-3xl hover:bg-blue-600 transition-colors disabled:opacity-50"
                       >
                         {updating ? "Updating..." : "Confirm"}
                       </button>
@@ -399,7 +399,7 @@ export const TableView = ({
                       <button
                         onClick={() => updateTransactionStatus(entry._id)}
                         disabled={updating}
-                        className="px-2 py-0.5 bg-blue-500 text-white text-xs rounded hover:bg-blue-600 disabled:opacity-50"
+                        className="px-2 py-0.5 bg-blue-500 text-white text-xs rounded-xl hover:bg-blue-600 disabled:opacity-50"
                       >
                         {updating ? "..." : "Confirm"}
                       </button>

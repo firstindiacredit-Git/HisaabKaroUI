@@ -17,19 +17,19 @@ const MobileListView = ({ transactions, currentPage, pageSize, onTransactionClic
             <div
               key={transaction._id}
               onClick={() => onTransactionClick(transaction.transactionId, transaction.source)}
-              className="bg-white rounded-md shadow-sm relative overflow-hidden"
+              className="bg-white dark:bg-gray-800 rounded-md shadow-sm relative overflow-hidden"
             >
               {/* Main Content */}
               <div className="px-2.5 py-2 flex items-center space-x-2">
                 {/* Index Badge */}
-                <div className="w-5 h-5 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center">
+                <div className="w-5 h-5 rounded-full bg-gray-100 dark:bg-gray-900 flex-shrink-0 flex items-center justify-center">
                   <span className="text-xs font-medium text-gray-600">
                     {((currentPage - 1) * pageSize) + index + 1}
                   </span>
                 </div>
 
                 {/* Avatar Circle */}
-                <div className="w-7 h-7 rounded-full bg-blue-50 flex-shrink-0 flex items-center justify-center">
+                <div className="w-7 h-7 rounded-full bg-blue-50 dark:bg-gray-900 flex-shrink-0 flex items-center justify-center">
                   <span className="text-sm font-semibold text-blue-600">
                     {(transaction.source === "client"
                       ? transaction.userId?.name
@@ -41,7 +41,7 @@ const MobileListView = ({ transactions, currentPage, pageSize, onTransactionClic
                 {/* Transaction Info */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
-                    <h3 className="font-medium text-sm text-gray-900 truncate pr-2">
+                    <h3 className="font-medium text-sm dark:text-gray-400 text-gray-900 truncate pr-2">
                       {transaction.source === "client"
                         ? transaction.userId?.name || "N/A"
                         : transaction.clientUserId?.name || "N/A"}
@@ -78,7 +78,7 @@ const MobileListView = ({ transactions, currentPage, pageSize, onTransactionClic
               </div>
 
               {/* Transaction Summary Bar */}
-              <div className="grid grid-cols-2 divide-x divide-gray-100 border-t border-gray-100 text-[10px]">
+              <div className="grid grid-cols-2 divide-x divide-gray-100 dark:divide-gray-900 border-t border-gray-100 dark:border-gray-900 text-[10px]">
                 <div className="py-1 px-2">
                   <div className="flex items-center justify-center space-x-1">
                     <span className="text-gray-500">{t("transactions.youWillGet")}:</span>

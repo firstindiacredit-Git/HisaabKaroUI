@@ -17,16 +17,16 @@ const MobileGridView = ({ transactions, currentPage, pageSize, onTransactionClic
             <div
               key={transaction._id}
               onClick={() => onTransactionClick(transaction.transactionId, transaction.source)}
-              className="bg-white rounded-lg shadow-sm p-2.5 relative"
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-2.5 relative"
             >
               {/* Header with Index and Avatar */}
               <div className="flex items-center space-x-2 mb-2">
-                <div className="w-5 h-5 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center">
+                <div className="w-5 h-5 rounded-full dark:bg-gray-900 bg-gray-100 flex-shrink-0 flex items-center justify-center">
                   <span className="text-xs font-medium text-gray-600">
                     {((currentPage - 1) * pageSize) + index + 1}
                   </span>
                 </div>
-                <div className="w-7 h-7 rounded-full bg-blue-50 flex-shrink-0 flex items-center justify-center">
+                <div className="w-7 h-7 rounded-full dark:bg-gray-900 bg-blue-50 flex-shrink-0 flex items-center justify-center">
                   <span className="text-sm font-semibold text-blue-600">
                     {(transaction.source === "client"
                       ? transaction.userId?.name
@@ -35,7 +35,7 @@ const MobileGridView = ({ transactions, currentPage, pageSize, onTransactionClic
                   </span>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-medium text-sm text-gray-900 truncate">
+                  <h3 className="font-medium text-sm dark:text-gray-400 text-gray-900 truncate">
                     {transaction.source === "client"
                       ? transaction.userId?.name || "N/A"
                       : transaction.clientUserId?.name || "N/A"}
@@ -54,7 +54,7 @@ const MobileGridView = ({ transactions, currentPage, pageSize, onTransactionClic
               </div>
 
               {/* Outstanding Balance */}
-              <div className="mb-2 pb-2 border-b border-gray-100">
+              <div className="mb-2 pb-2 border-b border-gray-100 dark:border-gray-900">
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-gray-500">{t("transactions.outstandingBalance")}</span>
                   <span className={`text-sm font-medium ${

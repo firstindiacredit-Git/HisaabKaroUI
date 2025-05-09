@@ -8,6 +8,15 @@ import BusinessInvoice from "./pages/invoice/templates/BusinessInvoice";
 import ViewInvoice from "./pages/invoice/ViewInvoice";
 import ReceivedInvoices from "./pages/invoice/ReceivedInvoices";
 import SavedInvoices from "./pages/invoice/SavedInvoices";
+import SentInvoices from "./pages/invoice/SentInvoices";
+import InvoiceNavigation from "./components/InvoiceNavigation";
+
+const InvoiceLayout = ({ children }) => (
+  <div className="container mx-auto px-4 py-8">
+    <InvoiceNavigation />
+    {children}
+  </div>
+);
 
 function App() {
   return (
@@ -18,8 +27,30 @@ function App() {
       <Route path="/invoice/minimal" element={<MinimalInvoice />} />
       <Route path="/invoice/business" element={<BusinessInvoice />} />
       <Route path="/invoice/view/:id" element={<ViewInvoice />} />
-      <Route path="/received-invoices" element={<ReceivedInvoices />} />
-      <Route path="/saved-invoices" element={<SavedInvoices />} />
+      <Route
+        path="/received-invoices"
+        element={
+          <InvoiceLayout>
+            <ReceivedInvoices />
+          </InvoiceLayout>
+        }
+      />
+      <Route
+        path="/saved-invoices"
+        element={
+          <InvoiceLayout>
+            <SavedInvoices />
+          </InvoiceLayout>
+        }
+      />
+      <Route
+        path="/sent-invoices"
+        element={
+          <InvoiceLayout>
+            <SentInvoices />
+          </InvoiceLayout>
+        }
+      />
     </Routes>
   );
 }

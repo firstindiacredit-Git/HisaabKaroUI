@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "../../config/axios";
-import { Spin, Tag, Modal } from "antd";
+import { Spin, Tag, Modal, Button, Result } from "antd";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import { toast } from "react-hot-toast";
@@ -11,20 +11,43 @@ const ViewInvoice = () => {
   const navigate = useNavigate();
   const [invoice, setInvoice] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const invoiceRef = useRef(null);
 
   useEffect(() => {
+    // Validate invoice ID before making the request
+    if (!id) {
+      setError("Invoice ID is required");
+      setLoading(false);
+      toast.error("Invoice ID is required");
+      navigate("/saved-invoices");
+      return;
+    }
+
+    // Check if the ID is a valid MongoDB ObjectId format
+    if (!/^[0-9a-fA-F]{24}$/.test(id)) {
+      setError("Invalid invoice ID format");
+      setLoading(false);
+      toast.error("Invalid invoice ID format");
+      navigate("/saved-invoices");
+      return;
+    }
+
     fetchInvoice();
   }, [id]);
 
   const fetchInvoice = async () => {
     try {
+      setError(null);
+      setLoading(true);
+
       const token = localStorage.getItem("token");
       const userId = localStorage.getItem("userId");
       const email = localStorage.getItem("email");
 
       if (!token || !userId || !email) {
-        toast.error("Authentication required");
+        setError("Authentication required");
+        toast.error("Please login to view invoices");
         navigate("/login");
         return;
       }
@@ -46,10 +69,15 @@ const ViewInvoice = () => {
       }
     } catch (error) {
       console.error("Error fetching invoice:", error);
-      toast.error(error.response?.data?.message || "Failed to fetch invoice");
+      const errorMessage = error.response?.data?.message || "Failed to fetch invoice";
+      setError(errorMessage);
+      toast.error(errorMessage);
+      
       if (error.response?.status === 401 || error.response?.status === 403) {
         localStorage.clear();
         navigate("/login");
+      } else {
+        navigate("/saved-invoices");
       }
     } finally {
       setLoading(false);
@@ -135,16 +163,36 @@ const ViewInvoice = () => {
     );
   }
 
+  if (error) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Result
+          status="error"
+          title="Error Loading Invoice"
+          subTitle={error}
+          extra={[
+            <Button key="back" onClick={() => navigate(-1)}>
+              Go Back
+            </Button>,
+          ]}
+        />
+      </div>
+    );
+  }
+
   if (!invoice) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen">
-        <h2 className="text-2xl font-bold mb-4">Invoice not found</h2>
-        <button
-          onClick={() => navigate("/received-invoices")}
-          className="text-blue-500 hover:text-blue-600"
-        >
-          Back to Invoices
-        </button>
+      <div className="flex justify-center items-center h-screen">
+        <Result
+          status="404"
+          title="Invoice Not Found"
+          subTitle="The invoice you are looking for does not exist or has been deleted."
+          extra={
+            <Button type="primary" onClick={() => navigate(-1)}>
+              Go Back
+            </Button>
+          }
+        />
       </div>
     );
   }

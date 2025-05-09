@@ -75,7 +75,14 @@ const YourBooks = () => {
     }
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div className="group inline-block">
+  {/* <img
+    src="./favicon.png"
+    alt=""
+    className="w-12 transition-transform justify-center align-middle duration-700 group-hover:rotate-[360deg]"
+  /> */}
+</div>
+;
   if (error) return <div>{error}</div>;
 
   return (

@@ -12,6 +12,7 @@ const ReceivedInvoices = () => {
     unreadCount: 0,
     showNotifications: false,
   });
+  const [selectedTemplate, setSelectedTemplate] = useState("all");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -120,6 +121,52 @@ const ReceivedInvoices = () => {
     }
   };
 
+  const getTemplateDisplayName = (template) => {
+    switch (template) {
+      case "classic":
+        return "Classic Invoice";
+      case "modern":
+        return "Modern Invoice";
+      case "business":
+        return "Business Invoice";
+      case "minimal":
+        return "Minimal Invoice";
+      default:
+        return template;
+    }
+  };
+
+  const getTemplateIcon = (template) => {
+    switch (template) {
+      case "classic":
+        return (
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+        );
+      case "modern":
+        return (
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+          </svg>
+        );
+      case "business":
+        return (
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg>
+        );
+      case "minimal":
+        return (
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        );
+      default:
+        return null;
+    }
+  };
+
   const getStatusColor = (status) => {
     switch (status.toLowerCase()) {
       case "paid":
@@ -132,6 +179,18 @@ const ReceivedInvoices = () => {
         return "default";
     }
   };
+
+  const templateCategories = [
+    { value: "all", label: "All Templates" },
+    { value: "classic", label: "Classic" },
+    { value: "modern", label: "Modern" },
+    { value: "business", label: "Business" },
+    { value: "minimal", label: "Minimal" }
+  ];
+
+  const filteredInvoices = selectedTemplate === "all" 
+    ? receivedInvoices 
+    : receivedInvoices.filter(invoice => invoice.template === selectedTemplate);
 
   if (loading) {
     return (
@@ -150,70 +209,108 @@ const ReceivedInvoices = () => {
             <Badge count={notifications.unreadCount} className="ml-2" />
           )}
         </h1>
+        <div className="flex gap-4 items-center">
+          <select
+            value={selectedTemplate}
+            onChange={(e) => setSelectedTemplate(e.target.value)}
+            className="border border-gray-300 rounded-md px-3 py-2 bg-white dark:bg-gray-800 dark:border-gray-700"
+          >
+            {templateCategories.map((category) => (
+              <option key={category.value} value={category.value}>
+                {category.label}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
-      {receivedInvoices.length === 0 ? (
+      {filteredInvoices.length === 0 ? (
         <Empty description="No invoices received" className="my-8" />
       ) : (
-        <div className="grid gap-4">
-          {receivedInvoices.map((invoice) => (
-            <div
-              key={invoice._id}
-              className={`border border-blue-50 dark:border-gray-700 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer ${
-                !invoice.isRead
-                  ? "bg-blue-50  dark:bg-gray-800"
-                  : ""
-              }`}
-              onClick={() => {
-                if (!invoice._id) {
-                  toast.error("Invalid invoice ID");
-                  return;
-                }
-                navigate(`/invoice/view/${invoice._id}`);
-              }}
-            >
-              <div className="flex justify-between">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h3 className="font-semibold">
-                      Invoice #{invoice.invoiceNumber}
-                    </h3>
-                    {!invoice.isRead && <Badge dot className="animate-pulse" />}
-                  </div>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    From:{" "}
-                    {invoice.sender?.name ||
-                      invoice.billingDetails.from.companyName}
-                  </p>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    Sender Email:{" "}
-                    {invoice.sender?.email || invoice.billingDetails.from.email}
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    Date: {new Date(invoice.date).toLocaleDateString()}
-                  </p>
-                  {invoice.dueDate && (
-                    <p className="text-sm text-gray-500">
-                      Due Date: {new Date(invoice.dueDate).toLocaleDateString()}
-                    </p>
-                  )}
-                </div>
-                <div className="flex flex-col items-end">
-                  <span className="font-bold text-lg">
-                    ₹{invoice.total.toFixed(2)}
-                  </span>
-                  <Tag color={getStatusColor(invoice.status)} className="mt-2">
-                    {invoice.status.toUpperCase()}
-                  </Tag>
-                  {invoice.sentAt && (
-                    <span className="text-xs text-gray-500 mt-1">
-                      Received: {new Date(invoice.sentAt).toLocaleString()}
+        <div className="space-y-8">
+          {templateCategories
+            .filter(category => category.value !== "all")
+            .map(category => {
+              const templateInvoices = filteredInvoices.filter(
+                invoice => invoice.template === category.value
+              );
+              
+              if (templateInvoices.length === 0) return null;
+
+              return (
+                <div key={category.value} className="space-y-4">
+                  <div className="flex items-center gap-2 mb-4">
+                    {getTemplateIcon(category.value)}
+                    <h2 className="text-xl font-semibold">
+                      {getTemplateDisplayName(category.value)}
+                    </h2>
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      ({templateInvoices.length} invoices)
                     </span>
-                  )}
+                  </div>
+                  <div className="grid gap-4">
+                    {templateInvoices.map((invoice) => (
+                      <div
+                        key={invoice._id}
+                        className={`border border-blue-50 dark:border-gray-700 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer ${
+                          !invoice.isRead
+                            ? "bg-blue-50 dark:bg-gray-800"
+                            : ""
+                        }`}
+                        onClick={() => {
+                          if (!invoice._id) {
+                            toast.error("Invalid invoice ID");
+                            return;
+                          }
+                          navigate(`/invoice/view/${invoice._id}`);
+                        }}
+                      >
+                        <div className="flex justify-between">
+                          <div>
+                            <div className="flex items-center gap-2">
+                              <h3 className="font-semibold">
+                                Invoice #{invoice.invoiceNumber}
+                              </h3>
+                              {!invoice.isRead && <Badge dot className="animate-pulse" />}
+                            </div>
+                            <p className="text-gray-600 dark:text-gray-400">
+                              From:{" "}
+                              {invoice.sender?.name ||
+                                invoice.billingDetails.from.companyName}
+                            </p>
+                            <p className="text-gray-600 dark:text-gray-400">
+                              Sender Email:{" "}
+                              {invoice.sender?.email || invoice.billingDetails.from.email}
+                            </p>
+                            <p className="text-sm text-gray-500">
+                              Date: {new Date(invoice.date).toLocaleDateString()}
+                            </p>
+                            {invoice.dueDate && (
+                              <p className="text-sm text-gray-500">
+                                Due Date: {new Date(invoice.dueDate).toLocaleDateString()}
+                              </p>
+                            )}
+                          </div>
+                          <div className="flex flex-col items-end">
+                            <span className="font-bold text-lg">
+                              ₹{invoice.total.toFixed(2)}
+                            </span>
+                            <Tag color={getStatusColor(invoice.status)} className="mt-2">
+                              {invoice.status.toUpperCase()}
+                            </Tag>
+                            {invoice.sentAt && (
+                              <span className="text-xs text-gray-500 mt-1">
+                                Received: {new Date(invoice.sentAt).toLocaleString()}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              );
+            })}
         </div>
       )}
     </div>
